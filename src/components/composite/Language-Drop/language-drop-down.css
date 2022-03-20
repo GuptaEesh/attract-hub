@@ -1,0 +1,14 @@
+.btn.secondary{
+    padding: 5px;
+    margin-right: 1rem;
+    position: relative;
+}
+.language-menu{
+    background-color: var(--white);
+    color:var(--secondary-300);
+    border: 1px solid var(--primary-200);
+    gap:10px;
+    padding: 10px;
+    position: absolute;
+    transform: translateY(80%);
+}
