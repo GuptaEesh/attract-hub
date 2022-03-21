@@ -1,0 +1,13 @@
+.filter-section{
+    box-shadow:0 0 8px var(--primary-300);
+    height: 100vh;
+    top: 0;
+    position: sticky;
+    flex: 1 1 10%;
+    background-color: var(--primary-100);
+    overflow-y: hidden;
+}
+.product-image{
+    height: 20rem;
+    width: 30rem;
+}
