@@ -1,4 +1,4 @@
-import { v4 as uuid } from "uuid";
+import { v4 as uuid } from 'uuid'
 
 /**
  * Category Database can be added here.
@@ -6,22 +6,24 @@ import { v4 as uuid } from "uuid";
  * */
 
 export const categories = [
-  {
-    _id: uuid(),
-    categoryName: "fiction",
-    description:
-      "literature in the form of prose, especially novels, that describes imaginary events and people",
-  },
-  {
-    _id: uuid(),
-    categoryName: "non-fiction",
-    description:
-      "Non-fiction is writing that gives information or describes real events, rather than telling a story.",
-  },
-  {
-    _id: uuid(),
-    categoryName: "horror",
-    description:
-      "Meant to cause discomfort and fear for both the character and readers, horror writers often make use of supernatural and paranormal elements in morbid stories that are sometimes a little too realistic.",
-  },
-];
+    {
+        _id: uuid(),
+        categoryName: 'Exhausts',
+        image: 'https://drive.google.com/uc?export=view&id=1r14uHgHkdkOYM_OpVj76temIi0yKj9RD',
+    },
+    {
+        _id: uuid(),
+        categoryName: 'Wraps',
+        image: 'https://drive.google.com/uc?export=view&id=1UZ7HQOPMpC2M2BJ18SbxSDZ0O6ijT3oJ',
+    },
+    {
+        _id: uuid(),
+        categoryName: 'Safety',
+        image: 'https://drive.google.com/uc?export=view&id=1EyuvFi5kn69FORLiQAOMBZhu1zAOoocI',
+    },
+    {
+        _id: uuid(),
+        categoryName: 'Accessories',
+        image: 'https://drive.google.com/uc?export=view&id=1CftX9cm1Cg1z7HYi_haZxjPtSzWgIyM-',
+    },
+]
