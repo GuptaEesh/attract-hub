@@ -1,6 +1,6 @@
 export { ProductPage } from './products/single-product-page'
 export { WishList } from './wishlist/wishlist'
-// export { Cart } from './cart/cart'
+export { Cart } from './cart/cart'
 export { EmptyPage } from '../components/composite'
 export { Home } from './home/home-page'
 export { Filter } from './products/Filter/filter'
