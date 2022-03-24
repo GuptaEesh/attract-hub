@@ -1,0 +1,10 @@
+.address.eg-card {
+    height: 8rem;
+    gap: var(--size-12);
+    width: 80%;
+}
+.fixed-info-tag{
+    background-color:var(--white);
+    padding:10px;
+    margin-left:var(--size-08)
+}

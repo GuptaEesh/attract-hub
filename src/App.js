@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Nav } from './components/composite'
 import { CartProvider } from './helpers/contexts/cart-context'
 import { DataProvider } from './helpers/contexts/data-context'
-import { ProductListing, Home, WishList, ProductPage } from './Pages'
+import { ProductListing, Home, WishList, ProductPage, Cart } from './Pages'
 import { WishListProvider } from './helpers/contexts/wishlist-context'
 import { FilterProvider } from './helpers/contexts/filter-context'
 function App() {
@@ -24,7 +24,7 @@ function App() {
                                     path="/products/:id"
                                     element={<ProductPage />}
                                 />
-                                {/* <Route path="/cart" element={<Cart />} /> */}
+                                <Route path="/cart" element={<Cart />} />
                                 <Route
                                     path="/wishlist"
                                     element={<WishList />}
