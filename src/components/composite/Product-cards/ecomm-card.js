@@ -10,7 +10,7 @@ import { useAddCartItem, useAddWishItem, useRemoveWishItem } from './Item-Hooks'
 export function Card({ greyClass, product }) {
     let navigate = useNavigate()
     const [loader, setLoader] = useState(false)
-    const { image, inStock, brand, name, price, ratings, fastDelivery } =
+    const { image, inStock, brand, id, name, price, ratings, fastDelivery } =
         product
     const { items, dispatch } = useCart()
     const { wishItems, dispatchWish } = useWishList()
@@ -39,6 +39,13 @@ export function Card({ greyClass, product }) {
                     src={image}
                     loading="lazy"
                 />
+                {!greyClass && (
+                    <Button
+                        btnText="See Details"
+                        btnType="tertiary btn product-detail-btn bold md"
+                        btnFunc={() => navigate(`/products/${id}`)}
+                    />
+                )}
                 <header className="card-header bold justify-space-between">
                     <span className="flex flex-column sm">
                         {name}
@@ -71,6 +78,7 @@ export function Card({ greyClass, product }) {
                         </span>
                     </div>
                 </section>
+
                 {items.find((item) => item.id === product.id) ? (
                     <Button
                         btnFunc={moveToCart}
