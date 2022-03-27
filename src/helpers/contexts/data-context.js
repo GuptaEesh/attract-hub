@@ -1,27 +1,20 @@
-import axios from 'axios'
-import { createContext, useContext, useEffect, useState } from 'react'
-
+import { createContext, useContext, useReducer, useState } from 'react'
+import { dataReducer } from '../reducers'
 const DataContext = createContext()
 
 const DataProvider = ({ children }) => {
-    const [data, setData] = useState([])
-    const [categories, setCategories] = useState([])
-    const [loader, setLoader] = useState(false)
-    useEffect(async () => {
-        setLoader(true)
-        const apiData = await axios.get('/api/products')
-        const data = await axios.get('/api/categories')
-        setLoader(false)
-        setCategories(data.data.categories)
-        setData(
-            [...apiData.data.products].map((item) => ({
-                ...item,
-                price: Math.round(item.price / 70),
-            }))
-        )
-    }, [])
+    const [dataHandler, dispatchData] = useReducer(dataReducer, {
+        data: [],
+        categories: [],
+    })
+    const [popups, setPopups] = useState({
+        loader: false,
+        toast: false,
+    })
     return (
-        <DataContext.Provider value={{ data, loader, categories }}>
+        <DataContext.Provider
+            value={{ dataHandler, dispatchData, popups, setPopups }}
+        >
             {children}
         </DataContext.Provider>
     )
