@@ -5,7 +5,7 @@ const dataReducer = (dataHandler, action) => {
         case 'ADD_CATEGORIES':
             return { ...dataHandler, categories: action.payload }
         default:
-            break
+            return dataHandler
     }
 }
 export { dataReducer }
