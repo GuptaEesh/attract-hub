@@ -17,7 +17,7 @@ import {
 import '../products-page.css'
 export function Filter() {
     const { filters, dispatch } = useFilter()
-    const { categories } = useData()
+    const { dataHandler } = useData()
 
     return (
         <div className="flex flex-column justify-space-around filter-section">
@@ -86,7 +86,7 @@ export function Filter() {
                 />
             </FilterHolder>
             <FilterHolder legendName="Category Filter">
-                {categories.map(({ categoryName, id }) => (
+                {dataHandler.categories.map(({ categoryName, id }) => (
                     <CheckBox
                         key={id}
                         checkBoxName={categoryName}

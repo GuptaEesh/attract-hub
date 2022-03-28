@@ -15,7 +15,7 @@ const FilterContext = createContext()
 
 const FilterProvider = ({ children }) => {
     const [filters, dispatch] = useReducer(filtersReducer, initial)
-    const { data } = useData()
+    const { dataHandler } = useData()
     let finalArray = getFiltered(
         sortByPrice,
         range,
@@ -23,7 +23,7 @@ const FilterProvider = ({ children }) => {
         fastDelivery,
         category,
         ratings
-    )(filters, data)
+    )(filters, dataHandler.data)
     return (
         <FilterContext.Provider value={{ filters, dispatch, finalArray }}>
             {children}

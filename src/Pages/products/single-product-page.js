@@ -13,19 +13,19 @@ import {
 import { useWishList } from '../../helpers/contexts/wishlist-context'
 export function ProductPage() {
     let navigate = useNavigate()
-    const { data } = useData()
+    const { dataHandler } = useData()
     const [loader, setLoader] = useState(false)
     const { items, dispatch } = useCart()
     const { wishItems, dispatchWish } = useWishList()
     const { id } = useParams()
-    let product = data.filter((item) => item.id === id)
+    let product = dataHandler.data.filter((item) => item.id === id)
     product = product[0]
     const moveToCart = () => navigate('/cart')
     const addCartItem = () => useAddCartItem(product, dispatch, setLoader)
     const addWishItem = () => useAddWishItem(product, dispatchWish)
     const removeWishItem = () => useRemoveWishItem(product, dispatchWish)
 
-    return data
+    return dataHandler.data
         .filter((product) => product.id === id)
         .map(({ name, image, price, brand, ratings }) => (
             <div
