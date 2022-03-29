@@ -7,16 +7,19 @@ export const Input = ({
     inputPlaceHolder,
     inputType,
     inputValue,
+    pattern,
 }) => {
     return (
         <input
             checked={checkStatus}
+            pattern={pattern}
             type={inputType}
             value={inputValue}
             name={inputName}
             onChange={inputFunc}
             className={inputClass}
             placeholder={inputPlaceHolder}
+            required
         />
     )
 }

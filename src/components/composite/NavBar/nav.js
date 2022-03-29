@@ -2,13 +2,16 @@ import { Button, Input } from '../../atomic'
 import { LanguageDrop } from '../index'
 import React from 'react'
 import '../NavBar/nav.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../../../helpers/contexts/cart-context'
 import { useWishList } from '../../../helpers/contexts/wishlist-context'
-
-export function Nav({ profileImg }) {
+import { useAuth } from '../../../helpers/contexts/auth-context'
+// use profile image here
+export function Nav() {
     const { items } = useCart()
+    const { logout, isAuthenticated } = useAuth()
     const { wishItems } = useWishList()
+    const navigate = useNavigate()
     let wishlistCounter = wishItems.length
     wishlistCounter = wishlistCounter > 100 ? '100+' : wishlistCounter
     let cartCounter = items.reduce(
@@ -35,23 +38,22 @@ export function Nav({ profileImg }) {
                     inputClass="input-text md"
                     inputPlaceHolder="Search..."
                 />
-                <a href="/">
-                    <Button
-                        btnType="primary btn md login without-shadow "
-                        btnText="Login"
-                    />
-                </a>
             </section>
             <section className="flex align-center">
                 <LanguageDrop />
-                <img
-                    className="profile-avatar img-sm xsm"
-                    alt="profile-img"
-                    src={
-                        profileImg ||
-                        'https://www.w3schools.com/howto/img_avatar.png'
-                    }
-                />
+                {!isAuthenticated ? (
+                    <Button
+                        btnType="primary bold btn md login without-shadow "
+                        btnText="->]"
+                        btnFunc={() => navigate('/login')}
+                    />
+                ) : (
+                    <Button
+                        btnType="primary bold btn md login without-shadow "
+                        btnText="[->"
+                        btnFunc={logout}
+                    />
+                )}
             </section>
             <div className="nav-section-right align-center">
                 <div className="icon-with-badge">

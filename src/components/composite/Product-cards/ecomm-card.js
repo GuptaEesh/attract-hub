@@ -7,6 +7,7 @@ import { SmallLoader } from '../'
 import { useWishList } from '../../../helpers/contexts/wishlist-context'
 import './cards.css'
 import { useAddCartItem, useAddWishItem, useRemoveWishItem } from './Item-Hooks'
+import { useAuth } from '../../../helpers/contexts/auth-context'
 export function Card({ greyClass, product }) {
     let navigate = useNavigate()
     const [loader, setLoader] = useState(false)
@@ -14,9 +15,19 @@ export function Card({ greyClass, product }) {
         product
     const { items, dispatch } = useCart()
     const { wishItems, dispatchWish } = useWishList()
-    const addWishItem = () => useAddWishItem(product, dispatchWish)
-    const addCartItem = () => useAddCartItem(product, dispatch, setLoader)
-    const removeWishItem = () => useRemoveWishItem(product, dispatchWish)
+    const { isAuthenticated } = useAuth()
+    const addWishItem = () =>
+        isAuthenticated
+            ? useAddWishItem(product, dispatchWish)
+            : navigate('/login')
+    const addCartItem = () =>
+        isAuthenticated
+            ? useAddCartItem(product, dispatch, setLoader)
+            : navigate('/login')
+    const removeWishItem = () =>
+        isAuthenticated
+            ? useRemoveWishItem(product, dispatchWish)
+            : navigate('/login')
     const moveToCart = () => navigate('/cart')
     return (
         <div style={{ position: 'relative', height: 'max-content' }}>

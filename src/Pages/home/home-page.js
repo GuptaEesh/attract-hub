@@ -89,57 +89,6 @@ export function Home() {
                     )
                 )}
             </div>
-            <div className="flex flex-column" style={{ gap: '2rem' }}>
-                <h2 className="text-center size-16">Products Wall</h2>
-                <section className="flex align-center justify-space-between">
-                    <div
-                        className="flex flex-wrap justify-space-around"
-                        style={{ width: '36vw' }}
-                    >
-                        {dataHandler.data.slice(0, 2).map(({ image, id }) => (
-                            <img
-                                key={id}
-                                src={image}
-                                alt="product-images"
-                                loading="lazy"
-                                style={{ width: '50%' }}
-                            />
-                        ))}
-                    </div>
-                    <div
-                        className="flex flex-wrap justify-space-around"
-                        style={{ width: '36vw', height: '22vw' }}
-                    >
-                        {dataHandler.data.slice(9, 15).map(({ image, id }) => (
-                            <img
-                                key={id}
-                                alt="product-images"
-                                src={image}
-                                loading="lazy"
-                                style={{ width: '30%', height: '45%' }}
-                            />
-                        ))}
-                    </div>
-
-                    <div
-                        className="flex flex-wrap justify-space-around align-center"
-                        style={{ width: '24vw', height: '22vw' }}
-                    >
-                        {dataHandler.data.slice(5, 9).map(({ image, id }) => (
-                            <img
-                                key={id}
-                                src={image}
-                                loading="lazy"
-                                style={{
-                                    filter: 'brightness(0.7)',
-                                    width: '45%',
-                                    height: '40%',
-                                }}
-                            />
-                        ))}
-                    </div>
-                </section>
-            </div>
 
             <Footer />
         </div>

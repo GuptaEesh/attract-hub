@@ -1,3 +1,5 @@
+export { SignUp } from './signup/sign-up'
+export {Login} from './login/login'
 export { ProductPage } from './products/single-product-page'
 export { WishList } from './wishlist/wishlist'
 export { Cart } from './cart/cart'
