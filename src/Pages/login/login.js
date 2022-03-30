@@ -34,7 +34,7 @@ export function Login() {
                 password,
             })
             setFormFields({ ...formFields, loader: false })
-            login(data.encodedToken)
+            login(data)
         } catch (err) {
             setFormFields({ ...formFields, error: true })
             setTimeout(

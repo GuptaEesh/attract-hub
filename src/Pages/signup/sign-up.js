@@ -34,7 +34,7 @@ export function SignUp() {
                 password,
             })
             setFormFields({ ...formFields, loader: false })
-            login(response.data.encodedToken)
+            login(response.data)
         } catch (err) {
             setFormFields({
                 ...formFields,

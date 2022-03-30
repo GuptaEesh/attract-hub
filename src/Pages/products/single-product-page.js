@@ -11,6 +11,7 @@ import {
     useRemoveWishItem,
 } from '../../components/composite/Product-cards/Item-Hooks'
 import { useWishList } from '../../helpers/contexts/wishlist-context'
+import { useAuth } from '../../helpers/contexts/auth-context'
 export function ProductPage() {
     let navigate = useNavigate()
     const { dataHandler } = useData()
@@ -21,10 +22,19 @@ export function ProductPage() {
     let product = dataHandler.data.filter((item) => item.id === id)
     product = product[0]
     const moveToCart = () => navigate('/cart')
-    const addCartItem = () => useAddCartItem(product, dispatch, setLoader)
-    const addWishItem = () => useAddWishItem(product, dispatchWish)
-    const removeWishItem = () => useRemoveWishItem(product, dispatchWish)
-
+    const addCartItem = () =>
+        isAuthenticated
+            ? useAddCartItem(product, dispatch, setLoader)
+            : navigate('/login')
+    const addWishItem = () =>
+        isAuthenticated
+            ? useAddWishItem(product, dispatchWish)
+            : navigate('/login')
+    const removeWishItem = () =>
+        isAuthenticated
+            ? useRemoveWishItem(product, dispatchWish)
+            : navigate('/login')
+    const { isAuthenticated } = useAuth()
     return dataHandler.data
         .filter((product) => product.id === id)
         .map(({ name, image, price, brand, ratings }) => (
