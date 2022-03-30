@@ -9,7 +9,7 @@ import emptyCart from '../../images/empty-cart.svg'
 export function Cart() {
     const { items } = useCart()
     let totalPrice = items.reduce(
-        (total, item) => (total += Number(item.price * item.quantity)),
+        (total, item) => (total += Number(item.price * item.qty)),
         0
     )
     let discount = Math.round(0.05 * totalPrice)
@@ -25,7 +25,7 @@ export function Cart() {
                 </h1>
 
                 {items.map((cartItem) => (
-                    <CartProducts key={cartItem.id} cartItem={cartItem} />
+                    <CartProducts key={cartItem._id} cartItem={cartItem} />
                 ))}
             </section>
             <section className="flex flex-column align-center">

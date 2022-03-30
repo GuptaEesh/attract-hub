@@ -1,11 +1,13 @@
 import { createContext, useContext, useReducer } from 'react'
 import { wishListItemsReducer } from '../reducers'
+import { useAuth } from './auth-context'
 
 const WishListContext = createContext(null)
 
 function WishListProvider({ children }) {
+    const { userData } = useAuth()
     const [wishList, dispatchWish] = useReducer(wishListItemsReducer, {
-        wishListItems: [],
+        wishListItems: userData.wishlist,
     })
     const wishItems = wishList.wishListItems
     return (

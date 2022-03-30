@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom'
 
 const AuthContext = createContext()
 const initialData = {
-    token: localStorage.getItem(`token`),
-    data: localStorage.getItem(`userData`),
+    token: localStorage.getItem('token'),
+    data: JSON.parse(localStorage.getItem('userData')),
 }
 const AuthProvider = ({ children }) => {
-    const [authToken, setAuthToken] = useState({ initialData })
+    const [authToken, setAuthToken] = useState(initialData)
     const navigate = useNavigate()
     const isAuthenticated = authToken.token ? true : false
     const login = (data) => {
@@ -21,15 +21,14 @@ const AuthProvider = ({ children }) => {
         setAuthToken({ token: null, data: null })
         navigate('/login')
     }
-
     return (
         <AuthContext.Provider
             value={{
                 login,
                 logout,
                 isAuthenticated,
-                authToken: authToken.token,
-                userData: authToken.data,
+                token: authToken.token,
+                userData: authToken.data ?? { cart: [], wishlist: [] },
             }}
         >
             {children}

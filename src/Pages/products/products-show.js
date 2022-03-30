@@ -13,13 +13,13 @@ export function ProductShow() {
                     <Card
                         greyClass={false}
                         product={product}
-                        key={product.id}
+                        key={product._id}
                     />
                 ) : (
                     <CardGrey
                         greyText="OUT OF STOCK"
                         product={product}
-                        key={product.id}
+                        key={product._id}
                     />
                 )
             )}

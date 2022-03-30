@@ -12,10 +12,17 @@ export function ProductListing() {
             (async () => {
                 try {
                     setPopups((popups) => ({ ...popups, loader: true }))
-                    const data = await axios.get('/api/products')
+                    const data = await Promise.all([
+                        axios.get('/api/products'),
+                        axios.get('/api/categories'),
+                    ])
+                    dispatchData({
+                        type: 'ADD_CATEGORIES',
+                        payload: data[1].data.categories,
+                    })
                     dispatchData({
                         type: 'ADD_PRODUCTS',
-                        payload: [...data.data.products].map((item) => ({
+                        payload: [...data[0].data.products].map((item) => ({
                             ...item,
                             price: Math.round(item.price / 70),
                         })),
