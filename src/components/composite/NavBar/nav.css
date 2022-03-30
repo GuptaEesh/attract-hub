@@ -11,6 +11,9 @@
 .nav-bar:hover{
     background-color: var(--white);
 }
+.login{
+    padding:0 10px;
+}
 .notification.mat {
     background-image: linear-gradient(to top, var(--secondary-300), var(--red-400));
 }
@@ -20,6 +23,12 @@
 }
 .right-nav{
     width: 12%;
+}
+.account{
+    position: relative;
+}
+.profile-avatar{
+    cursor: pointer;
 }
 @media all and (max-width:800px){
     .nav-bar .input-text.md {

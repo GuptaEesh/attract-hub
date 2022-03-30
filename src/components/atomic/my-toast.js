@@ -12,7 +12,7 @@ export function MyToast({ message, alertType }) {
                 className={`bold alert ${alertType}`}
                 style={{ width: '20rem' }}
             >
-                {message}
+                {message} !
             </div>
         </div>
     )

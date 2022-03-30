@@ -1,21 +1,34 @@
 import './App.css'
-import { Route, Routes } from 'react-router-dom'
-import { Nav } from './components/composite'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import { Nav, PrivateRoute } from './components/composite'
 import { CartProvider } from './helpers/contexts/cart-context'
 import { DataProvider } from './helpers/contexts/data-context'
-import { ProductListing, Home, WishList, ProductPage, Cart } from './Pages'
+import {
+    ProductListing,
+    Home,
+    WishList,
+    ProductPage,
+    Cart,
+    Login,
+    SignUp,
+} from './Pages'
 import { WishListProvider } from './helpers/contexts/wishlist-context'
 import { FilterProvider } from './helpers/contexts/filter-context'
 function App() {
+    const location = useLocation()
+    const routeCheck =
+        location.pathname === '/login' || location.pathname === '/signup'
     return (
         <div className="App">
             <DataProvider>
                 <FilterProvider>
                     <CartProvider>
                         <WishListProvider>
-                            <Nav />
+                            {!routeCheck && <Nav />}
                             <Routes>
                                 <Route path="/" element={<Home />} />
+                                <Route path="/login" element={<Login />} />
+                                <Route path="/signup" element={<SignUp />} />
                                 <Route
                                     path="/products"
                                     element={<ProductListing />}
@@ -24,10 +37,19 @@ function App() {
                                     path="/products/:id"
                                     element={<ProductPage />}
                                 />
-                                <Route path="/cart" element={<Cart />} />
+                                <Route
+                                    path="/cart"
+                                    element={
+                                        <PrivateRoute component={<Cart />} />
+                                    }
+                                />
                                 <Route
                                     path="/wishlist"
-                                    element={<WishList />}
+                                    element={
+                                        <PrivateRoute
+                                            component={<WishList />}
+                                        />
+                                    }
                                 />
                             </Routes>
                         </WishListProvider>

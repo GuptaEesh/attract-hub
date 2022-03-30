@@ -1,0 +1,18 @@
+.login-page{
+    height: 100vh;
+    background-image: linear-gradient(to left,var(--secondary-300),var(--red-400));
+}
+.register-link:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.condition-checked{
+    text-decoration: line-through;
+}
+.guest-login{
+    width: 100%;
+}
+.guest-login:hover{
+    background-color: var(--secondary-200);
+    color: var(--white);
+}
