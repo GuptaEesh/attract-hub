@@ -1,20 +1,13 @@
-import { newCart, updatedCart } from '../utils'
 const cartItemsReducer = (cart, action) => {
     switch (action.type) {
         case 'ADD_TO_CART':
-            return {
-                ...cart,
-                cartItems: [
-                    ...cart.cartItems,
-                    { ...action.payload, quantity: 1 },
-                ],
-            }
+            return { cartItems: action.payload }
 
         case 'INCREASE_ITEM_COUNT':
-            return { ...cart, cartItems: updatedCart(cart, action) }
+            return { cartItems: action.payload }
 
         case 'DELETE_PRODUCT':
-            return { ...cart, cartItems: newCart(cart, action) }
+            return { cartItems: action.payload }
         default:
             return cart
     }

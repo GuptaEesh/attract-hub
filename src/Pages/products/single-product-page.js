@@ -24,17 +24,17 @@ export function ProductPage() {
     const moveToCart = () => navigate('/cart')
     const addCartItem = () =>
         isAuthenticated
-            ? useAddCartItem(product, dispatch, setLoader)
+            ? useAddCartItem(product, dispatch, token, setLoader)
             : navigate('/login')
     const addWishItem = () =>
         isAuthenticated
-            ? useAddWishItem(product, dispatchWish)
+            ? useAddWishItem(product, dispatchWish, token)
             : navigate('/login')
-    const removeWishItem = () =>
+    const removeWishItem = (id) =>
         isAuthenticated
-            ? useRemoveWishItem(product, dispatchWish)
+            ? useRemoveWishItem(dispatchWish, token, id)
             : navigate('/login')
-    const { isAuthenticated } = useAuth()
+    const { isAuthenticated, token } = useAuth()
     return dataHandler.data
         .filter((product) => product.id === id)
         .map(({ name, image, price, brand, ratings }) => (
@@ -66,7 +66,7 @@ export function ProductPage() {
                             ) ? (
                                 <span
                                     className="material-icons text-blue"
-                                    onClick={removeWishItem}
+                                    onClick={() => removeWishItem(product._id)}
                                 >
                                     favorite
                                 </span>

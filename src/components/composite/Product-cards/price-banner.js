@@ -32,30 +32,34 @@ export function PriceBanner({
             <h2>Price Details:</h2>
             <section>
                 <table>
-                    <tr>
-                        <td className="sm">Total</td>
-                        <td className="sm">{totalPrice}$</td>
-                    </tr>
-                    <tr>
-                        <td className="sm">Discount</td>
-                        <td className="sm">{discount}$</td>
-                    </tr>
-                    <tr>
-                        <td className="sm">Delivery Charges</td>
-                        <td className="sm">
-                            {delivery === 0 ? 'Free Delivery' : `${delivery}$`}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="sm">Coupon Code:</td>
-                        <td className="sm">{coupon}$</td>
-                    </tr>
-                    <tr>
-                        <td className="bold size-12">Total Amount:</td>
-                        <td className="bold size-12">
-                            {totalPrice + delivery - coupon - discount}$
-                        </td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td className="sm">Total</td>
+                            <td className="sm">{totalPrice}$</td>
+                        </tr>
+                        <tr>
+                            <td className="sm">Discount</td>
+                            <td className="sm">{discount}$</td>
+                        </tr>
+                        <tr>
+                            <td className="sm">Delivery Charges</td>
+                            <td className="sm">
+                                {delivery === 0
+                                    ? 'Free Delivery'
+                                    : `${delivery}$`}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className="sm">Coupon Code:</td>
+                            <td className="sm">{coupon}$</td>
+                        </tr>
+                        <tr>
+                            <td className="bold size-12">Total Amount:</td>
+                            <td className="bold size-12">
+                                {totalPrice + delivery - coupon - discount}$
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </section>
 

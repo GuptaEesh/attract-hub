@@ -7,6 +7,8 @@ import {
     useAddWishItem,
 } from './Item-Hooks'
 import './cards.css'
+import { useAuth } from '../../../helpers/contexts/auth-context'
+import axios from 'axios'
 export function CartProducts({ cartItem }) {
     const { image, name, desc, ratings, price, maxQuantity, fastDelivery } =
         cartItem
@@ -16,17 +18,31 @@ export function CartProducts({ cartItem }) {
     for (let i = 1; i <= maxQuantity; i++) {
         buyNumbers.push(<option value={i}>{i}</option>)
     }
-
-    const quantityHandler = (e) => {
+    const { token } = useAuth()
+    const url = `/api/user/cart/${cartItem._id}`
+    const quantityHandler = async (e) => {
+        const response = await axios.post(
+            url,
+            {
+                action: {
+                    type: 'increment',
+                    payload: e.target.value,
+                },
+            },
+            {
+                headers: {
+                    authorization: token,
+                },
+            }
+        )
         dispatch({
             type: 'INCREASE_ITEM_COUNT',
-            payload: { quantity: e.target.value, cartItem },
+            payload: response.data.cart,
         })
     }
-    const deleteCartProduct = () => useRemoveCartItem(cartItem, dispatch)
-    const removeWishItem = () => useRemoveWishItem(cartItem, dispatchWish)
-    const addWishItem = () => useAddWishItem(cartItem, dispatchWish)
-
+    const deleteCartProduct = (id) => useRemoveCartItem(dispatch, token, id)
+    const removeWishItem = (id) => useRemoveWishItem(dispatchWish, token, id)
+    const addWishItem = () => useAddWishItem(cartItem, dispatchWish, token)
     return (
         <div className="flex flex-row cart-product">
             <img
@@ -54,14 +70,14 @@ export function CartProducts({ cartItem }) {
                     <section className="flex flex-column">
                         <span
                             className="material-icons"
-                            onClick={deleteCartProduct}
+                            onClick={() => deleteCartProduct(cartItem._id)}
                         >
                             delete
                         </span>
                         {wishItems.find((item) => item.id === cartItem.id) ? (
                             <span
                                 className="material-icons text-blue"
-                                onClick={removeWishItem}
+                                onClick={() => removeWishItem(cartItem._id)}
                             >
                                 favorite
                             </span>
@@ -87,7 +103,7 @@ export function CartProducts({ cartItem }) {
                         <label className="bold md cart-counter">
                             Qty:
                             <select
-                                value={cartItem.quantity}
+                                value={cartItem.qty}
                                 onChange={quantityHandler}
                                 className="text-white bold md"
                                 name="quantity"
@@ -110,7 +126,7 @@ export function CartProducts({ cartItem }) {
                             className="bold size-12"
                             style={{ paddingRight: '10px' }}
                         >
-                            {price * Number(cartItem.quantity)}$
+                            {price * Number(cartItem.qty)}$
                         </span>
                     </section>
                 ) : (

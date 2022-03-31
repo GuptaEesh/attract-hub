@@ -12,10 +12,11 @@ export function Nav() {
     const { logout, isAuthenticated } = useAuth()
     const { wishItems } = useWishList()
     const navigate = useNavigate()
+
     let wishlistCounter = wishItems.length
     wishlistCounter = wishlistCounter > 100 ? '100+' : wishlistCounter
     let cartCounter = items.reduce(
-        (totalItems, item) => (totalItems += Number(item.quantity)),
+        (totalItems, item) => (totalItems += Number(item.qty)),
         0
     )
     cartCounter = cartCounter > 100 ? '100+' : cartCounter

@@ -5,15 +5,18 @@ import { useCart } from '../../../helpers/contexts/cart-context'
 import { SmallLoader } from '../'
 import { useWishList } from '../../../helpers/contexts/wishlist-context'
 import { useRemoveWishItem, useAddWishItem, useAddCartItem } from './Item-Hooks'
+import { useAuth } from '../../../helpers/contexts/auth-context'
 export function WishCard({ greyClass, product }) {
     let navigate = useNavigate()
     const [loader, setLoader] = useState(false)
+    const { token } = useAuth()
     const { image, brand, name, price, ratings } = product
     const { items, dispatch } = useCart()
     const { wishItems, dispatchWish } = useWishList()
-    const addWishItem = () => useAddWishItem(product, dispatchWish)
-    const removeWishItem = () => useRemoveWishItem(product, dispatchWish)
-    const addCartItem = () => useAddCartItem(product, dispatch, setLoader)
+    const addWishItem = () => useAddWishItem(product, dispatchWish, token)
+    const removeWishItem = (id) => useRemoveWishItem(dispatchWish, token, id)
+    const addCartItem = () =>
+        useAddCartItem(product, dispatch, token, setLoader)
     const moveToCart = () => navigate('/cart')
     return (
         <div style={{ position: 'relative' }}>
@@ -33,7 +36,7 @@ export function WishCard({ greyClass, product }) {
                     {wishItems.find((item) => item.id === product.id) ? (
                         <span
                             className="material-icons text-blue"
-                            onClick={removeWishItem}
+                            onClick={() => removeWishItem(product._id)}
                         >
                             favorite
                         </span>

@@ -15,18 +15,18 @@ export function Card({ greyClass, product }) {
         product
     const { items, dispatch } = useCart()
     const { wishItems, dispatchWish } = useWishList()
-    const { isAuthenticated } = useAuth()
+    const { isAuthenticated, token } = useAuth()
     const addWishItem = () =>
         isAuthenticated
-            ? useAddWishItem(product, dispatchWish)
+            ? useAddWishItem(product, dispatchWish, token)
             : navigate('/login')
     const addCartItem = () =>
         isAuthenticated
-            ? useAddCartItem(product, dispatch, setLoader)
+            ? useAddCartItem(product, dispatch, token, setLoader)
             : navigate('/login')
-    const removeWishItem = () =>
+    const removeWishItem = (id) =>
         isAuthenticated
-            ? useRemoveWishItem(product, dispatchWish)
+            ? useRemoveWishItem(dispatchWish, token, id)
             : navigate('/login')
     const moveToCart = () => navigate('/cart')
     return (
@@ -65,7 +65,7 @@ export function Card({ greyClass, product }) {
                     {wishItems.find((item) => item.id === product.id) ? (
                         <span
                             className="material-icons text-blue"
-                            onClick={removeWishItem}
+                            onClick={() => removeWishItem(product._id)}
                         >
                             favorite
                         </span>
