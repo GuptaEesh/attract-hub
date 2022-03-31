@@ -1,30 +1,22 @@
 import axios from 'axios'
+import { getConfig } from './get-config'
 
-const getConfig = (token) => ({
-    headers: {
-        authorization: token,
-    },
-})
-
-const useRemoveWishItem = async (dispatch, token, id) => {
+const useRemoveWishItem = async (dispatch, token, id, setPopup) => {
     try {
+        setPopup((popup) => ({ ...popup, wishloader: true }))
         const response = await axios.delete(
             `/api/user/wishlist/${id}`,
 
             getConfig(token)
         )
+        setPopup((popup) => ({ ...popup, wishloader: false }))
         dispatch({
-            type: 'REMOVE_FROM_WISHLIST',
+            type: 'MANIPULATE_WISHLIST',
             payload: response.data.wishlist,
         })
     } catch (e) {
         console.log(e)
     }
 }
-// const useRemoveWishItem = (product, dispatchWish) =>
-//     dispatchWish({
-//         type: 'REMOVE_FROM_WISHLIST',
-//         payload: product,
-//     })
 
 export { useRemoveWishItem }

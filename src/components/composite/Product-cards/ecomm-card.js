@@ -3,30 +3,33 @@ import { FaShippingFast } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
 import { useCart } from '../../../helpers/contexts/cart-context'
-import { SmallLoader } from '../'
-import { useWishList } from '../../../helpers/contexts/wishlist-context'
 import './cards.css'
 import { useAddCartItem, useAddWishItem, useRemoveWishItem } from './Item-Hooks'
 import { useAuth } from '../../../helpers/contexts/auth-context'
+import { Loading, SmallLoader } from '../Loader'
 export function Card({ greyClass, product }) {
     let navigate = useNavigate()
-    const [loader, setLoader] = useState(false)
     const { image, inStock, brand, id, name, price, ratings, fastDelivery } =
         product
-    const { items, dispatch } = useCart()
-    const { wishItems, dispatchWish } = useWishList()
+    const { items, dispatch, wishItems } = useCart()
+    const [popup, setPopup] = useState({
+        cartloader: false,
+        wishloader: false,
+        toast: false,
+    })
+    const { cartloader, wishloader } = popup
     const { isAuthenticated, token } = useAuth()
     const addWishItem = () =>
         isAuthenticated
-            ? useAddWishItem(product, dispatchWish, token)
+            ? useAddWishItem(product, dispatch, token, setPopup)
             : navigate('/login')
     const addCartItem = () =>
         isAuthenticated
-            ? useAddCartItem(product, dispatch, token, setLoader)
+            ? useAddCartItem(product, dispatch, token, setPopup)
             : navigate('/login')
     const removeWishItem = (id) =>
         isAuthenticated
-            ? useRemoveWishItem(dispatchWish, token, id)
+            ? useRemoveWishItem(dispatch, token, id, setPopup)
             : navigate('/login')
     const moveToCart = () => navigate('/cart')
     return (
@@ -62,7 +65,9 @@ export function Card({ greyClass, product }) {
                         {name}
                         <small className="sm light">{brand}</small>
                     </span>
-                    {wishItems.find((item) => item.id === product.id) ? (
+                    {wishloader ? (
+                        <Loading />
+                    ) : wishItems.find((item) => item.id === product.id) ? (
                         <span
                             className="material-icons text-blue"
                             onClick={() => removeWishItem(product._id)}
@@ -100,7 +105,7 @@ export function Card({ greyClass, product }) {
                     <Button
                         btnFunc={addCartItem}
                         disabled={greyClass}
-                        btnText={loader ? <SmallLoader /> : 'Add To Cart'}
+                        btnText={cartloader ? <SmallLoader /> : 'Add To Cart'}
                         btnType="primary btn without-shadow"
                     />
                 )}

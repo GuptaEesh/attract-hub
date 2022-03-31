@@ -1,14 +1,9 @@
-// const useAddWishItem = (product, dispatchWish) =>
 import axios from 'axios'
+import { getConfig } from './get-config'
 
-const getConfig = (token) => ({
-    headers: {
-        authorization: token,
-    },
-})
-
-const useAddWishItem = async (product, dispatch, token) => {
+const useAddWishItem = async (product, dispatch, token, setPopup) => {
     try {
+        setPopup((popup) => ({ ...popup, wishloader: true }))
         const response = await axios.post(
             '/api/user/wishlist',
             {
@@ -16,14 +11,14 @@ const useAddWishItem = async (product, dispatch, token) => {
             },
             getConfig(token)
         )
-        dispatch({ type: 'ADD_TO_WISHLIST', payload: response.data.wishlist })
+        setPopup((popup) => ({ ...popup, wishloader: false }))
+        dispatch({
+            type: 'MANIPULATE_WISHLIST',
+            payload: response.data.wishlist,
+        })
     } catch (e) {
         console.log(e)
     }
 }
-// dispatchWish({
-//     type: 'ADD_TO_WISHLIST',
-//     payload: product,
-// })
 
 export { useAddWishItem }

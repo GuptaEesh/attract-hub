@@ -12,7 +12,6 @@ import {
     Login,
     SignUp,
 } from './Pages'
-import { WishListProvider } from './helpers/contexts/wishlist-context'
 import { FilterProvider } from './helpers/contexts/filter-context'
 function App() {
     const location = useLocation()
@@ -23,36 +22,30 @@ function App() {
             <DataProvider>
                 <FilterProvider>
                     <CartProvider>
-                        <WishListProvider>
-                            {!routeCheck && <Nav />}
-                            <Routes>
-                                <Route path="/" element={<Home />} />
-                                <Route path="/login" element={<Login />} />
-                                <Route path="/signup" element={<SignUp />} />
-                                <Route
-                                    path="/products"
-                                    element={<ProductListing />}
-                                />
-                                <Route
-                                    path="/products/:id"
-                                    element={<ProductPage />}
-                                />
-                                <Route
-                                    path="/cart"
-                                    element={
-                                        <PrivateRoute component={<Cart />} />
-                                    }
-                                />
-                                <Route
-                                    path="/wishlist"
-                                    element={
-                                        <PrivateRoute
-                                            component={<WishList />}
-                                        />
-                                    }
-                                />
-                            </Routes>
-                        </WishListProvider>
+                        {!routeCheck && <Nav />}
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/signup" element={<SignUp />} />
+                            <Route
+                                path="/products"
+                                element={<ProductListing />}
+                            />
+                            <Route
+                                path="/products/:id"
+                                element={<ProductPage />}
+                            />
+                            <Route
+                                path="/cart"
+                                element={<PrivateRoute component={<Cart />} />}
+                            />
+                            <Route
+                                path="/wishlist"
+                                element={
+                                    <PrivateRoute component={<WishList />} />
+                                }
+                            />
+                        </Routes>
                     </CartProvider>
                 </FilterProvider>
             </DataProvider>

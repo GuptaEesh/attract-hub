@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { Button } from '../../components/atomic'
-import { SmallLoader } from '../../components/composite'
+import { Loading, SmallLoader } from '../../components/composite'
 import { useCart } from '../../helpers/contexts/cart-context'
 import { useData } from '../../helpers/contexts/data-context'
 import './products-page.css'
@@ -10,29 +10,32 @@ import {
     useAddWishItem,
     useRemoveWishItem,
 } from '../../components/composite/Product-cards/Item-Hooks'
-import { useWishList } from '../../helpers/contexts/wishlist-context'
 import { useAuth } from '../../helpers/contexts/auth-context'
 export function ProductPage() {
     let navigate = useNavigate()
     const { dataHandler } = useData()
-    const [loader, setLoader] = useState(false)
-    const { items, dispatch } = useCart()
-    const { wishItems, dispatchWish } = useWishList()
+    const { items, dispatch, wishItems } = useCart()
+    const [popup, setPopup] = useState({
+        cartloader: false,
+        wishloader: false,
+        toast: false,
+    })
+    const { cartloader, wishloader } = popup
     const { id } = useParams()
-    let product = dataHandler.data.filter((item) => item.id === id)
-    product = product[0]
+    let product = dataHandler.data.filter((item) => item.id === id)[0]
+
     const moveToCart = () => navigate('/cart')
     const addCartItem = () =>
         isAuthenticated
-            ? useAddCartItem(product, dispatch, token, setLoader)
+            ? useAddCartItem(product, dispatch, token, setPopup)
             : navigate('/login')
     const addWishItem = () =>
         isAuthenticated
-            ? useAddWishItem(product, dispatchWish, token)
+            ? useAddWishItem(product, dispatch, token, setPopup)
             : navigate('/login')
     const removeWishItem = (id) =>
         isAuthenticated
-            ? useRemoveWishItem(dispatchWish, token, id)
+            ? useRemoveWishItem(dispatch, token, id, setPopup)
             : navigate('/login')
     const { isAuthenticated, token } = useAuth()
     return dataHandler.data
@@ -60,24 +63,34 @@ export function ProductPage() {
                         <section className="flex flex-column">
                             <span className="bold">{name}</span>
                             <small className="sm">{brand}</small>
-
-                            {wishItems.find(
-                                (item) => item.id === product.id
-                            ) ? (
-                                <span
-                                    className="material-icons text-blue"
-                                    onClick={() => removeWishItem(product._id)}
-                                >
-                                    favorite
-                                </span>
-                            ) : (
-                                <span
-                                    className="material-icons"
-                                    onClick={addWishItem}
-                                >
-                                    favorite
-                                </span>
-                            )}
+                            <div
+                                style={{
+                                    width: 'var(--size-12)',
+                                    height: 'var(--size-12)',
+                                }}
+                            >
+                                {wishloader ? (
+                                    <Loading />
+                                ) : wishItems.find(
+                                      (item) => item.id === product.id
+                                  ) ? (
+                                    <span
+                                        className="material-icons text-blue"
+                                        onClick={() =>
+                                            removeWishItem(product._id)
+                                        }
+                                    >
+                                        favorite
+                                    </span>
+                                ) : (
+                                    <span
+                                        className="material-icons"
+                                        onClick={addWishItem}
+                                    >
+                                        favorite
+                                    </span>
+                                )}
+                            </div>
                         </section>
                         <p className="size-12">{price}$/-</p>
 
@@ -116,7 +129,11 @@ export function ProductPage() {
                                 <Button
                                     btnFunc={addCartItem}
                                     btnText={
-                                        loader ? <SmallLoader /> : 'Add To Cart'
+                                        cartloader ? (
+                                            <SmallLoader />
+                                        ) : (
+                                            'Add To Cart'
+                                        )
                                     }
                                     btnType="primary btn without-shadow"
                                 />

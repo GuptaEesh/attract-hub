@@ -1,27 +1,17 @@
-// const useRemoveCartItem = (cartItem, dispatch) =>
-//     dispatch({
-//         type: 'DELETE_PRODUCT',
-//         payload: cartItem,
-//     })
-
-// export { useRemoveCartItem }
 import axios from 'axios'
+import { getConfig } from './get-config'
 
-const getConfig = (token) => ({
-    headers: {
-        authorization: token,
-    },
-})
-
-const useRemoveCartItem = async (dispatch, token, id) => {
+const useRemoveCartItem = async (dispatch, token, id, setPopup) => {
     try {
+        setPopup((popup) => ({ ...popup, cartloader: true }))
         const response = await axios.delete(
             `/api/user/cart/${id}`,
 
             getConfig(token)
         )
+        setPopup((popup) => ({ ...popup, cartloader: false }))
         dispatch({
-            type: 'DELETE_PRODUCT',
+            type: 'MANIPULATE_BAG',
             payload: response.data.cart,
         })
     } catch (e) {

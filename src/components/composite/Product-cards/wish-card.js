@@ -2,21 +2,24 @@ import { Button } from '../../atomic'
 import { useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
 import { useCart } from '../../../helpers/contexts/cart-context'
-import { SmallLoader } from '../'
-import { useWishList } from '../../../helpers/contexts/wishlist-context'
 import { useRemoveWishItem, useAddWishItem, useAddCartItem } from './Item-Hooks'
 import { useAuth } from '../../../helpers/contexts/auth-context'
+import { Loading, SmallLoader } from '../Loader'
 export function WishCard({ greyClass, product }) {
     let navigate = useNavigate()
-    const [loader, setLoader] = useState(false)
+    const [popup, setPopup] = useState({
+        cartloader: false,
+        wishloader: false,
+        toast: false,
+    })
+    const { cartloader, wishloader } = popup
     const { token } = useAuth()
     const { image, brand, name, price, ratings } = product
-    const { items, dispatch } = useCart()
-    const { wishItems, dispatchWish } = useWishList()
-    const addWishItem = () => useAddWishItem(product, dispatchWish, token)
-    const removeWishItem = (id) => useRemoveWishItem(dispatchWish, token, id)
-    const addCartItem = () =>
-        useAddCartItem(product, dispatch, token, setLoader)
+    const { items, dispatch, wishItems } = useCart()
+    const addWishItem = () => useAddWishItem(product, dispatch, token, setPopup)
+    const removeWishItem = (id) =>
+        useRemoveWishItem(dispatch, token, id, setPopup)
+    const addCartItem = () => useAddCartItem(product, dispatch, token, setPopup)
     const moveToCart = () => navigate('/cart')
     return (
         <div style={{ position: 'relative' }}>
@@ -33,7 +36,9 @@ export function WishCard({ greyClass, product }) {
                         {name}
                         <small className="sm light">{brand}</small>
                     </span>
-                    {wishItems.find((item) => item.id === product.id) ? (
+                    {wishloader ? (
+                        <Loading />
+                    ) : wishItems.find((item) => item.id === product.id) ? (
                         <span
                             className="material-icons text-blue"
                             onClick={() => removeWishItem(product._id)}
@@ -76,7 +81,7 @@ export function WishCard({ greyClass, product }) {
                     <Button
                         btnFunc={addCartItem}
                         disabled={greyClass}
-                        btnText={loader ? <SmallLoader /> : 'Move To Cart'}
+                        btnText={cartloader ? <SmallLoader /> : 'Move To Cart'}
                         btnType="primary btn without-shadow"
                     />
                 )}

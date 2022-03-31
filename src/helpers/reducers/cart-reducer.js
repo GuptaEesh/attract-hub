@@ -1,13 +1,11 @@
 const cartItemsReducer = (cart, action) => {
     switch (action.type) {
-        case 'ADD_TO_CART':
-            return { cartItems: action.payload }
+        case 'MANIPULATE_BAG':
+            return { ...cart, cartItems: action.payload }
 
-        case 'INCREASE_ITEM_COUNT':
-            return { cartItems: action.payload }
+        case 'MANIPULATE_WISHLIST':
+            return { ...cart, wishListItems: action.payload }
 
-        case 'DELETE_PRODUCT':
-            return { cartItems: action.payload }
         default:
             return cart
     }

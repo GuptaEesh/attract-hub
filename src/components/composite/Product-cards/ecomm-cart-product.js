@@ -1,48 +1,39 @@
 import { useCart } from '../../../helpers/contexts/cart-context'
-import { useWishList } from '../../../helpers/contexts/wishlist-context'
 import { FaStudiovinari } from 'react-icons/fa'
+import { useState } from 'react'
 import {
     useRemoveCartItem,
     useRemoveWishItem,
     useAddWishItem,
+    useQuantityHandler,
 } from './Item-Hooks'
 import './cards.css'
 import { useAuth } from '../../../helpers/contexts/auth-context'
-import axios from 'axios'
+import { Loading } from '../Loader'
 export function CartProducts({ cartItem }) {
     const { image, name, desc, ratings, price, maxQuantity, fastDelivery } =
         cartItem
-    const { dispatch } = useCart()
-    const { wishItems, dispatchWish } = useWishList()
+    const { dispatch, wishItems } = useCart()
+    const [popup, setPopup] = useState({
+        cartloader: false,
+        wishloader: false,
+        toast: false,
+    })
     let buyNumbers = []
     for (let i = 1; i <= maxQuantity; i++) {
         buyNumbers.push(<option value={i}>{i}</option>)
     }
     const { token } = useAuth()
-    const url = `/api/user/cart/${cartItem._id}`
-    const quantityHandler = async (e) => {
-        const response = await axios.post(
-            url,
-            {
-                action: {
-                    type: 'increment',
-                    payload: e.target.value,
-                },
-            },
-            {
-                headers: {
-                    authorization: token,
-                },
-            }
-        )
-        dispatch({
-            type: 'INCREASE_ITEM_COUNT',
-            payload: response.data.cart,
-        })
-    }
-    const deleteCartProduct = (id) => useRemoveCartItem(dispatch, token, id)
-    const removeWishItem = (id) => useRemoveWishItem(dispatchWish, token, id)
-    const addWishItem = () => useAddWishItem(cartItem, dispatchWish, token)
+    const { cartloader, wishloader } = popup
+
+    const quantityHandler = (event) =>
+        useQuantityHandler(event, cartItem, dispatch, token)
+    const deleteCartProduct = (id) =>
+        useRemoveCartItem(dispatch, token, id, setPopup)
+    const removeWishItem = (id) =>
+        useRemoveWishItem(dispatch, token, id, setPopup)
+    const addWishItem = () =>
+        useAddWishItem(cartItem, dispatch, token, setPopup)
     return (
         <div className="flex flex-row cart-product">
             <img
@@ -54,7 +45,10 @@ export function CartProducts({ cartItem }) {
                 style={{ paddingLeft: '1rem', width: '80%' }}
                 className=" bold justify-space-around flex flex-column align-space-between"
             >
-                <div className="flex align-center justify-space-between">
+                <div
+                    className="flex align-center justify-space-between"
+                    style={{ gap: '1rem' }}
+                >
                     <section className="flex flex-column">
                         <span>{name}</span>
                         <span className={fastDelivery ? 'sm text-blue' : 'sm'}>
@@ -68,27 +62,52 @@ export function CartProducts({ cartItem }) {
                         </span>
                     </section>
                     <section className="flex flex-column">
-                        <span
-                            className="material-icons"
-                            onClick={() => deleteCartProduct(cartItem._id)}
+                        <div
+                            style={{
+                                width: 'var(--size-16)',
+                                height: 'var(--size-16)',
+                            }}
                         >
-                            delete
-                        </span>
-                        {wishItems.find((item) => item.id === cartItem.id) ? (
-                            <span
-                                className="material-icons text-blue"
-                                onClick={() => removeWishItem(cartItem._id)}
-                            >
-                                favorite
-                            </span>
-                        ) : (
-                            <span
-                                className="material-icons"
-                                onClick={addWishItem}
-                            >
-                                favorite
-                            </span>
-                        )}
+                            {cartloader ? (
+                                <Loading />
+                            ) : (
+                                <span
+                                    className="material-icons"
+                                    onClick={() =>
+                                        deleteCartProduct(cartItem._id)
+                                    }
+                                >
+                                    delete
+                                </span>
+                            )}
+                        </div>
+                        <div
+                            style={{
+                                width: 'var(--size-16)',
+                                height: 'var(--size-16)',
+                            }}
+                        >
+                            {' '}
+                            {wishloader ? (
+                                <Loading />
+                            ) : wishItems.find(
+                                  (item) => item.id === cartItem.id
+                              ) ? (
+                                <span
+                                    className="material-icons text-blue"
+                                    onClick={() => removeWishItem(cartItem._id)}
+                                >
+                                    favorite
+                                </span>
+                            ) : (
+                                <span
+                                    className="material-icons"
+                                    onClick={addWishItem}
+                                >
+                                    favorite
+                                </span>
+                            )}
+                        </div>
                     </section>
                 </div>
                 <small className="xsm ">{desc}</small>
