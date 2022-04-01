@@ -1,3 +1,9 @@
+.eg-card.ecomm-card .material-icons:hover{
+    animation: none;
+}
+.eg-card.ecomm-card:hover{
+    box-shadow: 0 0 16px var(--secondary-200);
+}
 .card-tag{
     background-color:var(--primary-400);
     bottom:41%;

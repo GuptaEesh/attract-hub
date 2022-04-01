@@ -1,12 +1,12 @@
 import './home-page.css'
 import carImg from '../../images/lamboexh.png'
-import { Button, MyToast } from '../../components/atomic'
+import { Button } from '../../components/atomic'
 import { CategoryCard, Footer, Loader } from '../../components/composite'
 import { useNavigate } from 'react-router-dom'
 import { useFilter } from '../../helpers/contexts/filter-context'
 import { useData } from '../../helpers/contexts/data-context'
 import { useEffect } from 'react'
-import axios from 'axios'
+import { getCategories } from '../../helpers/utils'
 export function Home() {
     const navigate = useNavigate()
     const { dispatch } = useFilter()
@@ -20,32 +20,7 @@ export function Home() {
         navigate('/products')
     }
     const { dataHandler, dispatchData, popups, setPopups } = useData()
-    useEffect(
-        () =>
-            (async () => {
-                try {
-                    setPopups((popups) => ({ ...popups, loader: true }))
-                    const data = await axios.get('/api/categories')
-                    dispatchData({
-                        type: 'ADD_CATEGORIES',
-                        payload: data.data.categories,
-                    })
-                    setPopups((popups) => ({ ...popups, loader: false }))
-                } catch (error) {
-                    setPopups((popups) => ({ ...popups, loader: false }))
-                    setPopups((popups) => ({ ...popups, toast: true }))
-                    setTimeout(
-                        () =>
-                            setPopups((popups) => ({
-                                ...popups,
-                                toast: false,
-                            })),
-                        1500
-                    )
-                }
-            })(),
-        []
-    )
+    useEffect(() => getCategories(setPopups, dispatchData), [])
     return (
         <div className="flex flex-column justify-space-between">
             <div style={{ position: 'relative', marginBottom: '-5rem' }}>
@@ -64,12 +39,7 @@ export function Home() {
                 className="flex justify-space-around"
                 style={{ marginBottom: '10rem', width: '100%' }}
             >
-                {popups.toast ? (
-                    <MyToast
-                        message="Error:Cannot fetch categories"
-                        alertType="danger-alert"
-                    />
-                ) : popups.loader ? (
+                {popups.loader ? (
                     <Loader />
                 ) : (
                     dataHandler.categories.map(

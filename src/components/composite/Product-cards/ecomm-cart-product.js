@@ -2,22 +2,23 @@ import { useCart } from '../../../helpers/contexts/cart-context'
 import { FaStudiovinari } from 'react-icons/fa'
 import { useState } from 'react'
 import {
-    useRemoveCartItem,
-    useRemoveWishItem,
-    useAddWishItem,
-    useQuantityHandler,
-} from './Item-Hooks'
+    removeCartItem,
+    removeWishItem,
+    addWishItem,
+    quantityHandler,
+} from '../../../helpers/utils'
 import './cards.css'
 import { useAuth } from '../../../helpers/contexts/auth-context'
 import { Loading } from '../Loader'
+import { useData } from '../../../helpers/contexts/data-context'
 export function CartProducts({ cartItem }) {
     const { image, name, desc, ratings, price, maxQuantity, fastDelivery } =
         cartItem
     const { dispatch, wishItems } = useCart()
+    const { setPopups } = useData()
     const [popup, setPopup] = useState({
         cartloader: false,
         wishloader: false,
-        toast: false,
     })
     let buyNumbers = []
     for (let i = 1; i <= maxQuantity; i++) {
@@ -26,14 +27,14 @@ export function CartProducts({ cartItem }) {
     const { token } = useAuth()
     const { cartloader, wishloader } = popup
 
-    const quantityHandler = (event) =>
-        useQuantityHandler(event, cartItem, dispatch, token)
-    const deleteCartProduct = (id) =>
-        useRemoveCartItem(dispatch, token, id, setPopup)
-    const removeWishItem = (id) =>
-        useRemoveWishItem(dispatch, token, id, setPopup)
-    const addWishItem = () =>
-        useAddWishItem(cartItem, dispatch, token, setPopup)
+    const quantity = (event) =>
+        quantityHandler(event, cartItem, dispatch, token, setPopups)
+    const deleteProduct = (id) =>
+        removeCartItem(dispatch, token, id, setPopup, setPopups)
+    const removeWish = (id) =>
+        removeWishItem(dispatch, token, id, setPopup, setPopups)
+    const addWish = () =>
+        addWishItem(cartItem, dispatch, token, setPopup, setPopups)
     return (
         <div className="flex flex-row cart-product">
             <img
@@ -73,9 +74,7 @@ export function CartProducts({ cartItem }) {
                             ) : (
                                 <span
                                     className="material-icons"
-                                    onClick={() =>
-                                        deleteCartProduct(cartItem._id)
-                                    }
+                                    onClick={() => deleteProduct(cartItem._id)}
                                 >
                                     delete
                                 </span>
@@ -95,14 +94,14 @@ export function CartProducts({ cartItem }) {
                               ) ? (
                                 <span
                                     className="material-icons text-blue"
-                                    onClick={() => removeWishItem(cartItem._id)}
+                                    onClick={() => removeWish(cartItem._id)}
                                 >
                                     favorite
                                 </span>
                             ) : (
                                 <span
                                     className="material-icons"
-                                    onClick={addWishItem}
+                                    onClick={addWish}
                                 >
                                     favorite
                                 </span>
@@ -123,7 +122,7 @@ export function CartProducts({ cartItem }) {
                             Qty:
                             <select
                                 value={cartItem.qty}
-                                onChange={quantityHandler}
+                                onChange={quantity}
                                 className="text-white bold md"
                                 name="quantity"
                                 id="quantity"

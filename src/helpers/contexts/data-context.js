@@ -10,6 +10,8 @@ const DataProvider = ({ children }) => {
     const [popups, setPopups] = useState({
         loader: false,
         toast: false,
+        toastMessage: '',
+        toastType: '',
     })
     return (
         <DataContext.Provider

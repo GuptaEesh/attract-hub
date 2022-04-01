@@ -5,37 +5,32 @@ import { Loading, SmallLoader } from '../../components/composite'
 import { useCart } from '../../helpers/contexts/cart-context'
 import { useData } from '../../helpers/contexts/data-context'
 import './products-page.css'
-import {
-    useAddCartItem,
-    useAddWishItem,
-    useRemoveWishItem,
-} from '../../components/composite/Product-cards/Item-Hooks'
 import { useAuth } from '../../helpers/contexts/auth-context'
+import { addCartItem, addWishItem, removeWishItem } from '../../helpers/utils'
 export function ProductPage() {
     let navigate = useNavigate()
-    const { dataHandler } = useData()
+    const { dataHandler, setPopups } = useData()
     const { items, dispatch, wishItems } = useCart()
     const [popup, setPopup] = useState({
         cartloader: false,
         wishloader: false,
-        toast: false,
     })
     const { cartloader, wishloader } = popup
     const { id } = useParams()
     let product = dataHandler.data.filter((item) => item.id === id)[0]
 
     const moveToCart = () => navigate('/cart')
-    const addCartItem = () =>
+    const addCartProduct = () =>
         isAuthenticated
-            ? useAddCartItem(product, dispatch, token, setPopup)
+            ? addCartItem(product, dispatch, token, setPopup, setPopups)
             : navigate('/login')
-    const addWishItem = () =>
+    const addWish = () =>
         isAuthenticated
-            ? useAddWishItem(product, dispatch, token, setPopup)
+            ? addWishItem(product, dispatch, token, setPopup, setPopups)
             : navigate('/login')
-    const removeWishItem = (id) =>
+    const removeWish = (id) =>
         isAuthenticated
-            ? useRemoveWishItem(dispatch, token, id, setPopup)
+            ? removeWishItem(dispatch, token, id, setPopup, setPopups)
             : navigate('/login')
     const { isAuthenticated, token } = useAuth()
     return dataHandler.data
@@ -76,16 +71,14 @@ export function ProductPage() {
                                   ) ? (
                                     <span
                                         className="material-icons text-blue"
-                                        onClick={() =>
-                                            removeWishItem(product._id)
-                                        }
+                                        onClick={() => removeWish(product._id)}
                                     >
                                         favorite
                                     </span>
                                 ) : (
                                     <span
                                         className="material-icons"
-                                        onClick={addWishItem}
+                                        onClick={addWish}
                                     >
                                         favorite
                                     </span>
@@ -127,7 +120,7 @@ export function ProductPage() {
                                 />
                             ) : (
                                 <Button
-                                    btnFunc={addCartItem}
+                                    btnFunc={addCartProduct}
                                     btnText={
                                         cartloader ? (
                                             <SmallLoader />

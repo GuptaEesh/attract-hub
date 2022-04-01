@@ -4,8 +4,8 @@ import { Input, MyToast } from '../../components/atomic'
 import { PassChecker } from './pass-checker'
 import { InputPass, InputSimple, Loader } from '../../components/composite'
 import '../login/login.css'
-import axios from 'axios'
 import { useAuth } from '../../helpers/contexts/auth-context'
+import { signUpHandler } from '../../helpers/utils'
 
 export function SignUp() {
     const initial = {
@@ -23,33 +23,8 @@ export function SignUp() {
     const [formFields, setFormFields] = useState(initial)
     const { name, email, password, confirmPass, error, message, loader } =
         formFields
-    const submitHandler = async (e) => {
-        e.preventDefault()
-        try {
-            if (password !== confirmPass) throw 'passwordError'
-            setFormFields({ ...formFields, loader: true })
-            const response = await axios.post('/api/auth/signup', {
-                name,
-                email,
-                password,
-            })
-            setFormFields({ ...formFields, loader: false })
-            login(response.data)
-        } catch (err) {
-            setFormFields({
-                ...formFields,
-                error: true,
-                message:
-                    err === 'passwordError'
-                        ? "Passwords don't match"
-                        : "It's not you it's us",
-            })
-            setTimeout(
-                () => setFormFields({ ...formFields, error: false }),
-                1500
-            )
-        }
-    }
+    const submitHandler = (e) =>
+        signUpHandler(e, setFormFields, login, formFields)
     useEffect(() => (isAuthenticated ? navigate('/') : ''), [isAuthenticated])
     return error ? (
         <div className="login-page flex flex-column">
