@@ -6,6 +6,8 @@ const DataProvider = ({ children }) => {
     const [dataHandler, dispatchData] = useReducer(dataReducer, {
         data: [],
         categories: [],
+        addresses: [],
+        selectedAddress: '',
     })
     const [popups, setPopups] = useState({
         loader: false,
