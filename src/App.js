@@ -10,6 +10,7 @@ import {
     Home,
     WishList,
     ProductPage,
+    SearchPage,
     Cart,
     Login,
     SignUp,
@@ -39,6 +40,7 @@ function App() {
                         <Route path="*" element={<ErrorPage />} />
                         <Route path="/signup" element={<SignUp />} />
                         <Route path="/products" element={<ProductListing />} />
+                        <Route path="/:keyword" element={<SearchPage />} />
                         <Route path="/products/:id" element={<ProductPage />} />
                         <Route
                             path="/cart"

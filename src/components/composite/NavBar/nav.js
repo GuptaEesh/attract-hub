@@ -1,16 +1,29 @@
 import { Button, Input } from '../../atomic'
 import { LanguageDrop } from '../index'
-import React from 'react'
+import React, { useState } from 'react'
 import '../NavBar/nav.css'
+import { BiSearchAlt } from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../../../helpers/contexts/cart-context'
 import { useAuth } from '../../../helpers/contexts/auth-context'
+import { resetFilters } from '../../../Pages/products/Filter/filter-controller'
+import { useFilter } from '../../../helpers/contexts/filter-context'
 // use profile image here
 export function Nav() {
     const { items, wishItems } = useCart()
+    const { dispatch } = useFilter()
+    const [keyword, setKeyword] = useState()
     const { logout, isAuthenticated } = useAuth()
     const navigate = useNavigate()
-
+    let searchBtnStyle = {
+        borderRadius: '10px',
+        height: '100%',
+        color: 'var(--secondary-300)',
+        backgroundColor: 'var(--primary-100)',
+        cursor: 'pointer',
+        position: 'absolute',
+        right: 0,
+    }
     let wishlistCounter = wishItems.length
     wishlistCounter = wishlistCounter > 100 ? '100+' : wishlistCounter
     let cartCounter = items.reduce(
@@ -31,11 +44,23 @@ export function Nav() {
                     />
                 </Link>
             </div>
-            <section>
+            <section
+                className="flex align-center"
+                style={{ position: 'relative' }}
+            >
                 <Input
+                    inputValue={keyword}
+                    inputFunc={(e) => setKeyword(e.target.value)}
                     inputType="text"
                     inputClass="input-text md"
                     inputPlaceHolder="Search..."
+                />
+                <BiSearchAlt
+                    style={searchBtnStyle}
+                    onClick={() => {
+                        resetFilters(dispatch)
+                        navigate(`/${keyword}`)
+                    }}
                 />
             </section>
             <section className="flex align-center">
