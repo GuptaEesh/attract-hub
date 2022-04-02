@@ -1,0 +1,47 @@
+.address-holder{
+    background-color: var(--primary-100);
+    padding: 1rem;
+
+}
+.address-form{
+    background-color: var(--primary-100);
+    padding: var(--size-12);    
+    gap: var(--size-08);
+    
+}
+.address-field{
+    background-color: var(--white);
+    color: var(--primary-400);
+    max-width: 30%;
+}
+.address-text{
+    padding: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+.added-address{
+    gap:1rem;
+    padding:1rem ;
+    background-color: var(--primary-400);
+    width:30rem;
+}
+.delete-address{
+    cursor: pointer;
+    color:var(--red-400);
+}
+
+.edit-address{
+    cursor: pointer;
+}
+.select-address{
+    transition: all 0.8s ease;
+}
+.select-address:hover{
+    background-color: var(--secondary-300);
+    color:var(--white);
+    cursor: grab;
+}
+.select-address:active{
+    cursor: grabbing;
+}

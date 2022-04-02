@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Button } from '../../atomic'
 
 export function PriceBanner({
@@ -64,7 +65,11 @@ export function PriceBanner({
             </section>
 
             <a href="./checkout.html">
-                <button className="primary btn without-shadow">Checkout</button>
+                <Link to="/checkout">
+                    <button className="primary btn without-shadow">
+                        Checkout
+                    </button>
+                </Link>
             </a>
         </div>
     )

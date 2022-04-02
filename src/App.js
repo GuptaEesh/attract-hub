@@ -1,9 +1,10 @@
 import './App.css'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import { Nav, PrivateRoute } from './components/composite'
+import { AddressManage, Nav, PrivateRoute } from './components/composite'
 import { CartProvider } from './helpers/contexts/cart-context'
 import { useData } from './helpers/contexts/data-context'
 import {
+    CheckoutPage,
     ErrorPage,
     ProductListing,
     Home,
@@ -15,6 +16,7 @@ import {
 } from './Pages'
 import { FilterProvider } from './helpers/contexts/filter-context'
 import { MyToast } from './components/atomic'
+
 function App() {
     const location = useLocation()
     const { popups } = useData()
@@ -45,6 +47,18 @@ function App() {
                         <Route
                             path="/wishlist"
                             element={<PrivateRoute component={<WishList />} />}
+                        />
+                        <Route
+                            path="/checkout"
+                            element={
+                                <PrivateRoute component={<CheckoutPage />} />
+                            }
+                        />
+                        <Route
+                            path="/manage-address"
+                            element={
+                                <PrivateRoute component={<AddressManage />} />
+                            }
                         />
                     </Routes>
                 </CartProvider>

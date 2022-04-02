@@ -1,3 +1,5 @@
+export { AddressManage } from './address-manage/ecomm-address'
+export { AddressField } from './address-manage/address-field'
 export { Loading,SmallLoader,Loader } from './Loader'
 export {PrivateRoute} from './private-route'
 export { InputPass } from './inputbox/input-password'
@@ -7,7 +9,6 @@ export {
     WishCard,
     CategoryCard,
     PriceBanner,
-    AddressManage,
     Card,
     CartProducts,
     CardGrey,
