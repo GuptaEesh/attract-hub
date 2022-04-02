@@ -3,14 +3,21 @@ export function MyToast({ message, alertType }) {
         <div
             className="flex"
             style={{
-                width: '100vw',
+                width: '100%',
+                position: 'fixed',
+                top: '10%',
+                zIndex: 3,
                 marginTop: '2rem',
                 justifyContent: 'flex-end',
             }}
         >
             <div
                 className={`bold alert ${alertType}`}
-                style={{ width: '20rem' }}
+                style={{
+                    width: '30%',
+                    border: '3px solid var(--primary-400)',
+                    borderRight: 0,
+                }}
             >
                 {message} !
             </div>

@@ -3,30 +3,38 @@ import { FaShippingFast } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
 import { useCart } from '../../../helpers/contexts/cart-context'
-import { SmallLoader } from '../'
-import { useWishList } from '../../../helpers/contexts/wishlist-context'
 import './cards.css'
-import { useAddCartItem, useAddWishItem, useRemoveWishItem } from './Item-Hooks'
+import {
+    addCartItem,
+    addWishItem,
+    removeWishItem,
+} from '../../../helpers/utils'
 import { useAuth } from '../../../helpers/contexts/auth-context'
+import { Loading, SmallLoader } from '../Loader'
+import { useData } from '../../../helpers/contexts/data-context'
 export function Card({ greyClass, product }) {
     let navigate = useNavigate()
-    const [loader, setLoader] = useState(false)
     const { image, inStock, brand, id, name, price, ratings, fastDelivery } =
         product
-    const { items, dispatch } = useCart()
-    const { wishItems, dispatchWish } = useWishList()
+    const { items, dispatch, wishItems } = useCart()
+    const { setPopups } = useData()
+    const [popup, setPopup] = useState({
+        cartloader: false,
+        wishloader: false,
+    })
+    const { cartloader, wishloader } = popup
     const { isAuthenticated, token } = useAuth()
-    const addWishItem = () =>
+    const addWish = () =>
         isAuthenticated
-            ? useAddWishItem(product, dispatchWish, token)
+            ? addWishItem(product, dispatch, token, setPopup, setPopups)
             : navigate('/login')
-    const addCartItem = () =>
+    const addCartProduct = () =>
         isAuthenticated
-            ? useAddCartItem(product, dispatch, token, setLoader)
+            ? addCartItem(product, dispatch, token, setPopup, setPopups)
             : navigate('/login')
-    const removeWishItem = (id) =>
+    const removeWish = (id) =>
         isAuthenticated
-            ? useRemoveWishItem(dispatchWish, token, id)
+            ? removeWishItem(dispatch, token, id, setPopup, setPopups)
             : navigate('/login')
     const moveToCart = () => navigate('/cart')
     return (
@@ -62,15 +70,17 @@ export function Card({ greyClass, product }) {
                         {name}
                         <small className="sm light">{brand}</small>
                     </span>
-                    {wishItems.find((item) => item.id === product.id) ? (
+                    {wishloader ? (
+                        <Loading />
+                    ) : wishItems.find((item) => item.id === product.id) ? (
                         <span
                             className="material-icons text-blue"
-                            onClick={() => removeWishItem(product._id)}
+                            onClick={() => removeWish(product._id)}
                         >
                             favorite
                         </span>
                     ) : (
-                        <span className="material-icons" onClick={addWishItem}>
+                        <span className="material-icons" onClick={addWish}>
                             favorite
                         </span>
                     )}
@@ -98,9 +108,9 @@ export function Card({ greyClass, product }) {
                     />
                 ) : (
                     <Button
-                        btnFunc={addCartItem}
+                        btnFunc={addCartProduct}
                         disabled={greyClass}
-                        btnText={loader ? <SmallLoader /> : 'Add To Cart'}
+                        btnText={cartloader ? <SmallLoader /> : 'Add To Cart'}
                         btnType="primary btn without-shadow"
                     />
                 )}

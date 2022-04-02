@@ -4,13 +4,11 @@ import React from 'react'
 import '../NavBar/nav.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../../../helpers/contexts/cart-context'
-import { useWishList } from '../../../helpers/contexts/wishlist-context'
 import { useAuth } from '../../../helpers/contexts/auth-context'
 // use profile image here
 export function Nav() {
-    const { items } = useCart()
+    const { items, wishItems } = useCart()
     const { logout, isAuthenticated } = useAuth()
-    const { wishItems } = useWishList()
     const navigate = useNavigate()
 
     let wishlistCounter = wishItems.length

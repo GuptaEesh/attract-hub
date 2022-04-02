@@ -3,9 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Button } from '../../components/atomic'
 import { InputPass, InputSimple, Loader } from '../../components/composite'
 import { AiFillWarning } from 'react-icons/ai'
-import axios from 'axios'
 import './login.css'
 import { useAuth } from '../../helpers/contexts/auth-context'
+import { loginHandler } from '../../helpers/utils'
 export function Login() {
     const initial = {
         email: '',
@@ -25,24 +25,8 @@ export function Login() {
             password: 'adarshbalika',
         })
 
-    const submitHandler = async (e) => {
-        e.preventDefault()
-        try {
-            setFormFields({ ...formFields, loader: true })
-            const { data } = await axios.post('/api/auth/login', {
-                email,
-                password,
-            })
-            setFormFields({ ...formFields, loader: false })
-            login(data)
-        } catch (err) {
-            setFormFields({ ...formFields, error: true })
-            setTimeout(
-                () => setFormFields({ ...formFields, error: false }),
-                1500
-            )
-        }
-    }
+    const submitHandler = (e) =>
+        loginHandler(e, setFormFields, login, formFields)
     return (
         <div className="flex login-page align-center justify-center">
             {loader ? (

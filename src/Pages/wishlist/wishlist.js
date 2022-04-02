@@ -1,9 +1,9 @@
-import { useWishList } from '../../helpers/contexts/wishlist-context'
 import { EmptyPage, WishCard, WishCardGrey } from '../../components/composite'
 import emptyWishlist from '../../images/wishlist.svg'
+import { useCart } from '../../helpers/contexts/cart-context'
 
 export function WishList() {
-    const { wishItems } = useWishList()
+    const { wishItems } = useCart()
     return (
         <div className="align-center flex flex-column">
             <h2 className="size-20" style={{ margin: '1rem' }}>
