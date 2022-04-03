@@ -35,7 +35,6 @@ export const getCartItemsHandler = function (schema, request) {
  * */
 
 export const addItemToCartHandler = function (schema, request) {
-    console.log(request, 'requestToApi')
     const userId = requiresAuth.call(this, request)
     try {
         if (!userId) {
@@ -60,7 +59,6 @@ export const addItemToCartHandler = function (schema, request) {
         this.db.users.update({ _id: userId }, { cart: userCart })
         return new Response(201, {}, { cart: userCart })
     } catch (error) {
-        console.log(error)
         return new Response(
             500,
             {},

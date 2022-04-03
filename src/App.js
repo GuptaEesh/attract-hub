@@ -10,6 +10,7 @@ import {
     Home,
     WishList,
     ProductPage,
+    OrdersPage,
     SearchPage,
     Cart,
     Login,
@@ -25,7 +26,8 @@ function App() {
     const routeCheck =
         location.pathname === '/login' ||
         location.pathname === '/signup' ||
-        location.pathname === '/*'
+        location.pathname === '/*' ||
+        location.pathname === '/order_summary'
     return (
         <div className="App">
             <FilterProvider>
@@ -60,6 +62,12 @@ function App() {
                             path="/manage-address"
                             element={
                                 <PrivateRoute component={<AddressManage />} />
+                            }
+                        />
+                        <Route
+                            path="/order_summary"
+                            element={
+                                <PrivateRoute component={<OrdersPage />} />
                             }
                         />
                     </Routes>

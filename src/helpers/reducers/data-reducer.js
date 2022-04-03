@@ -1,7 +1,13 @@
 const dataReducer = (dataHandler, action) => {
     switch (action.type) {
         case 'ADD_ADDRESS':
-            return { ...dataHandler, addresses: action.payload }
+            return action.operation === 'delete'
+                ? {
+                      ...dataHandler,
+                      selectedAddress: '',
+                      addresses: action.payload,
+                  }
+                : { ...dataHandler, addresses: action.payload }
         case 'ADDRESS_UPDATE':
             return { ...dataHandler, selectedAddress: action.payload }
         case 'ADD_PRODUCTS':

@@ -1,10 +1,13 @@
 import { useNavigate } from 'react-router-dom'
+import { v4 as uuid } from 'uuid'
 import { Button } from '../../components/atomic'
 import { AddressField, CartProducts } from '../../components/composite'
 import { useCart } from '../../helpers/contexts/cart-context'
-
+import { useData } from '../../helpers/contexts/data-context'
+import './checkout-page.css'
 export function CheckoutPage() {
-    const { items } = useCart()
+    const { items, dispatch } = useCart()
+    const { dataHandler } = useData()
     const navigate = useNavigate()
     let totalPrice = items.reduce(
         (total, item) => (total += Number(item.price * item.qty)),
@@ -28,7 +31,25 @@ export function CheckoutPage() {
                 <CartProducts key={cartItem._id} cartItem={cartItem} />
             ))}
             <h2> Checkout price - {totalPrice + delivery - discount}$</h2>
-            <Button btnText="Order now" btnType="btn primary bold" />
+            {dataHandler.selectedAddress === '' ? (
+                <span className="bold" style={{ color: 'var(--red-400)' }}>
+                    Add Address Please !
+                </span> //Add a scroll to top button
+            ) : (
+                <span>Order now!</span>
+            )}
+            <Button
+                disabled={dataHandler.selectedAddress === '' ? true : false}
+                btnText="Order now"
+                btnType="btn primary bold order-btn"
+                btnFunc={() => {
+                    dispatch({
+                        type: 'ADD_TO_ORDER_SUMMARY',
+                        payload: { id: uuid(), order: items },
+                    }) //Have to empty cart on clicking this but backend doesn't support clear cart api.
+                    navigate('/order_summary')
+                }}
+            />
         </div>
     )
 }
