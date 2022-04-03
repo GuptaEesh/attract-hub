@@ -19,9 +19,9 @@ export function Cart() {
             className="flex flex-wrap flex-row justify-space-around"
             style={{ paddingTop: '5rem' }}
         >
-            <section>
+            <section style={{ backgroundColor: 'rgba(255,255,255,0.5)' }}>
                 <h1 className="bold size-16" style={{ margin: '1rem' }}>
-                    Shopping Cart
+                    Shopping Cart ({items.length})
                 </h1>
 
                 {items.map((cartItem) => (
