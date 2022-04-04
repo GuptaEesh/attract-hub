@@ -17,6 +17,7 @@ const AuthProvider = ({ children }) => {
     }
 
     const logout = () => {
+        localStorage.clear()
         setAuthToken({ token: null, data: null })
         navigate('/login')
     }
