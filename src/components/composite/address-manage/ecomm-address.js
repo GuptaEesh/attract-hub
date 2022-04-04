@@ -86,7 +86,11 @@ export function AddressManage() {
         let updatedAdresses = dataHandler.addresses.filter(
             (addressCheck) => address.id !== addressCheck.id
         )
-        dispatchData({ type: 'ADD_ADDRESS', payload: updatedAdresses })
+        dispatchData({
+            type: 'ADD_ADDRESS',
+            payload: updatedAdresses,
+            operation: 'delete',
+        })
     }
     return (
         <div
