@@ -3,3 +3,7 @@
     right:10%;
     top: 5%;    
 }
+.hero-img{
+    max-height: 90vh;
+    width: 100vw;
+}

@@ -4,14 +4,14 @@ import { MdHealthAndSafety } from 'react-icons/md'
 import { GiHeartKey, GiWrappedSweet, GiSnorkel } from 'react-icons/gi'
 import './footer.css'
 export function Footer() {
+    const gap10 = {
+        gap: '10px',
+    }
     return (
-        <div
-            className="flex footer align-left justify-space-around flex-wrap"
-            style={{ marginTop: '8rem' }}
-        >
+        <div className="flex footer align-left margin-top-8 justify-space-around flex-wrap">
             <div className="flex flex-column justify-center align-center connect-links">
                 <h2>Connect with us :</h2>
-                <section className="flex" style={{ gap: '10px' }}>
+                <section className="flex" style={gap10}>
                     <a
                         href="https://webdevjourney.hashnode.dev/"
                         target="_blank"
@@ -39,14 +39,14 @@ export function Footer() {
                 </section>
                 <section
                     className="flex flex-column align-center"
-                    style={{ gap: '10px' }}
+                    style={gap10}
                 >
                     <a
                         href="mailto:ssg4099@gmail.com"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="social-links bold flex align-center"
-                        style={{ gap: '10px' }}
+                        style={gap10}
                     >
                         Email-us <SiGmail className="md" />
                     </a>
@@ -55,21 +55,18 @@ export function Footer() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="social-links bold flex align-center"
-                        style={{ gap: '10px' }}
+                        style={gap10}
                     >
                         Whatsapp-us <BsFillTelephoneFill className="md" />
                     </a>
-                    <p style={{ gap: '10px' }}>Helpline : +91 89076-23468</p>
+                    <p style={gap10}>Helpline : +91 89076-23468</p>
                 </section>
             </div>
-            <div
-                className="flex flex-column justify-center"
-                style={{ gap: '1rem' }}
-            >
+            <div className="flex flex-column justify-center gap-1">
                 <h2 className="bold">Affiliated Partners :</h2>
 
                 <p className="flex flex-column connect-links bold">
-                    <span className="flex" style={{ gap: '1rem' }}>
+                    <span className="flex gap-1">
                         <span className="sm">
                             Keyos <GiHeartKey className="sm" />
                         </span>{' '}
@@ -77,7 +74,7 @@ export function Footer() {
                             Wrapofy <GiWrappedSweet className="sm" />
                         </span>
                     </span>
-                    <span className="flex" style={{ gap: '1rem' }}>
+                    <span className="flex gap-1">
                         <span className="sm">
                             X-Hosts <GiSnorkel className="sm" />
                         </span>{' '}
@@ -88,10 +85,7 @@ export function Footer() {
                 </p>
                 <span className="sm">More Partners joining soon.....</span>
             </div>
-            <div
-                className="align-left flex flex-column justify-center"
-                style={{ gap: '1rem' }}
-            >
+            <div className="align-left flex flex-column justify-center gap-1">
                 <h2 className="bold">We are best known for :</h2>
                 <div className="flex justify-center bold connect-links">
                     <ul className="list-squareUnordered">

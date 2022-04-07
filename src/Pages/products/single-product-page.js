@@ -1,15 +1,21 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '../../components/atomic'
 import { Loading, SmallLoader } from '../../components/composite'
 import { useCart } from '../../helpers/contexts/cart-context'
 import { useData } from '../../helpers/contexts/data-context'
 import './products-page.css'
 import { useAuth } from '../../helpers/contexts/auth-context'
-import { addCartItem, addWishItem, removeWishItem } from '../../helpers/utils'
+import {
+    addCartItem,
+    addWishItem,
+    getProducts,
+    removeWishItem,
+} from '../../helpers/utils'
 export function ProductPage() {
     let navigate = useNavigate()
-    const { dataHandler, setPopups } = useData()
+    const { dataHandler, setPopups, dispatchData } = useData()
+    useEffect(() => getProducts(setPopups, dispatchData), [dataHandler])
     const { items, dispatch, wishItems } = useCart()
     const [popup, setPopup] = useState({
         cartloader: false,
@@ -34,39 +40,22 @@ export function ProductPage() {
             : navigate('/login')
     const { isAuthenticated, token } = useAuth()
     return dataHandler.data
-        .filter((product) => product.id === id)
-        .map(({ name, image, price, brand, ratings }) => (
-            <div
-                className="flex flex-column align-center"
-                style={{ gap: '5rem' }}
-                key={id}
-            >
-                <h2 className="size-20" style={{ marginTop: '1rem' }}>
-                    {name} Description
-                </h2>
+        ?.filter((product) => product.id === id)
+        ?.map(({ id, name, image, price, brand, ratings }) => (
+            <div className="flex flex-column align-center gap-4" key={id}>
+                <h2 className="size-20 margin-top-1">{name} Description</h2>
 
-                <div
-                    className="flex flex-wrap align-center"
-                    style={{ gap: '1rem' }}
-                >
+                <div className="flex flex-wrap align-center gap-1">
                     <img className="product-image" src={image} alt={name} />
 
-                    <section
-                        className="flex flex-column"
-                        style={{ flex: 2, gap: '2rem' }}
-                    >
+                    <section className="flex flex-column flex-2 gap-2">
                         <section className="flex flex-column">
                             <span className="bold">{name}</span>
                             <small className="sm">{brand}</small>
-                            <div
-                                style={{
-                                    width: 'var(--size-12)',
-                                    height: 'var(--size-12)',
-                                }}
-                            >
+                            <div className="loader-container">
                                 {wishloader ? (
                                     <Loading />
-                                ) : wishItems.find(
+                                ) : wishItems?.find(
                                       (item) => item.id === product.id
                                   ) ? (
                                     <span
@@ -112,7 +101,7 @@ export function ProductPage() {
                                 btnText="Talk to Seller"
                             />
 
-                            {items.find((item) => item.id === id) ? (
+                            {items?.find((item) => item.id === id) ? (
                                 <Button
                                     btnFunc={moveToCart}
                                     btnText={'Go To Cart'}

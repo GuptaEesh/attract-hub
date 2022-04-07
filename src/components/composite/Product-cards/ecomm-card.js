@@ -38,7 +38,7 @@ export function Card({ greyClass, product }) {
             : navigate('/login')
     const moveToCart = () => navigate('/cart')
     return (
-        <div style={{ position: 'relative', height: 'max-content' }}>
+        <div className="position-relative height-max-content">
             {fastDelivery && inStock && (
                 <h2 className="bold justify-center flex align-center card-tag">
                     Fast <FaShippingFast size="1rem" color="var(--white)" />
@@ -50,7 +50,6 @@ export function Card({ greyClass, product }) {
                         ? 'eg-card ecomm-card'
                         : 'eg-card ecomm-card grey-card'
                 }
-                style={{ width: '12rem', marginLeft: 0 }}
             >
                 <img
                     alt="product-img"
@@ -72,7 +71,7 @@ export function Card({ greyClass, product }) {
                     </span>
                     {wishloader ? (
                         <Loading />
-                    ) : wishItems.find((item) => item.id === product.id) ? (
+                    ) : wishItems?.find((item) => item.id === product.id) ? (
                         <span
                             className="material-icons text-blue"
                             onClick={() => removeWish(product._id)}
@@ -100,7 +99,7 @@ export function Card({ greyClass, product }) {
                     </div>
                 </section>
 
-                {items.find((item) => item.id === product.id) ? (
+                {items?.find((item) => item.id === product.id) ? (
                     <Button
                         btnFunc={moveToCart}
                         btnText={'Go To Cart'}

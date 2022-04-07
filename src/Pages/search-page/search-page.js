@@ -22,10 +22,7 @@ export function SearchPage() {
         getProducts(setPopups, dispatchData)
     }, [])
     return loader ? (
-        <div
-            className="flex align-center flex-column justify-center"
-            style={{ marginTop: '20vh' }}
-        >
+        <div className="flex align-center flex-column justify-center margin-top-r-20">
             <Loader />
             <h2>Showing you the search results! Hang on</h2>
         </div>
@@ -33,8 +30,8 @@ export function SearchPage() {
         <div className="flex flex-column align-center">
             <img
                 src={noResults}
+                className="width-r-100 height-r-80"
                 alt="No results found"
-                style={{ width: '100vw', height: '80vh' }}
             />
             <h1>No results found, put in some other keyword</h1>
         </div>
@@ -50,10 +47,7 @@ export function SearchPage() {
                 {keyword}
                 &apos;
             </p>
-            <section
-                style={{ gap: '1rem' }}
-                className="flex flex-wrap justify-space-around "
-            >
+            <section className="flex flex-wrap justify-space-around gap-1">
                 {finalArray.map(
                     (resultItem) =>
                         (resultItem.name

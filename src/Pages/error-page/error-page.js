@@ -3,8 +3,7 @@ export function ErrorPage() {
     return (
         <div>
             <img
-                style={{ height: '80vh' }}
-                className="img-responsive"
+                className="img-responsive height-r-80"
                 src={NetworkError}
                 alt="Network error image"
             />

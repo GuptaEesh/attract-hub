@@ -26,23 +26,13 @@ export function InputPass({
                 />
                 {visibility ? (
                     <BsEyeSlash
+                        className="position-absolute cursor-pointer pass-viewer"
                         onClick={() => setVisibility(!visibility)}
-                        style={{
-                            position: 'absolute',
-                            right: '2%',
-                            cursor: 'pointer',
-                        }}
-                        color="var(--primary-400)"
                     />
                 ) : (
                     <BsEyeFill
                         onClick={() => setVisibility(!visibility)}
-                        style={{
-                            position: 'absolute',
-                            right: '2%',
-                            cursor: 'pointer',
-                        }}
-                        color="var(--primary-400)"
+                        className="position-absolute cursor-pointer pass-viewer"
                     />
                 )}
             </div>

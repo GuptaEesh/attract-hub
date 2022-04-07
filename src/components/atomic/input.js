@@ -7,6 +7,7 @@ export const Input = ({
     inputPlaceHolder,
     inputType,
     inputValue,
+    disabled,
     pattern,
 }) => {
     return (
@@ -19,6 +20,7 @@ export const Input = ({
             onChange={inputFunc}
             className={inputClass}
             placeholder={inputPlaceHolder}
+            disabled={disabled}
             required
         />
     )

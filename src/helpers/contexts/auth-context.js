@@ -9,6 +9,7 @@ const initialData = {
 const AuthProvider = ({ children }) => {
     const [authToken, setAuthToken] = useState(initialData)
     const navigate = useNavigate()
+
     const isAuthenticated = authToken.token ? true : false
     const login = (data) => {
         localStorage.setItem('token', JSON.stringify(data.encodedToken))
@@ -17,6 +18,7 @@ const AuthProvider = ({ children }) => {
     }
 
     const logout = () => {
+        localStorage.clear()
         setAuthToken({ token: null, data: null })
         navigate('/login')
     }

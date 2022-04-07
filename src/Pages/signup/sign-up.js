@@ -31,10 +31,7 @@ export function SignUp() {
             <MyToast message={message} alertType="danger-alert" />
         </div>
     ) : (
-        <div
-            className="login-page flex align-center flex-column justify-center"
-            style={{ height: '100vh' }}
-        >
+        <div className="login-page flex align-center flex-column justify-center height-r-100">
             {loader ? (
                 <div className="flex flex-column align-center">
                     <Loader />
@@ -43,8 +40,7 @@ export function SignUp() {
             ) : (
                 <form
                     onSubmit={submitHandler}
-                    className="flex glass flex-column"
-                    style={{ gap: '10px', padding: '2rem' }}
+                    className="flex glass flex-column padding-2 gap-1"
                 >
                     {' '}
                     <InputSimple

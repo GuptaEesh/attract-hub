@@ -6,13 +6,8 @@ export function WishList() {
     const { wishItems } = useCart()
     return (
         <div className="align-center flex flex-column">
-            <h2 className="size-20" style={{ margin: '1rem' }}>
-                Wishlist ({wishItems.length})
-            </h2>
-            <section
-                className="flex flex-wrap justify-space-around"
-                style={{ gap: '1rem' }}
-            >
+            <h2 className="size-20 margin-1">Wishlist ({wishItems.length})</h2>
+            <section className="flex flex-wrap justify-space-around gap-1">
                 {wishItems.length ? (
                     wishItems.map((product) =>
                         product.inStock ? (
