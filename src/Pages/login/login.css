@@ -16,3 +16,7 @@
     background-color: var(--secondary-200);
     color: var(--white);
 }
+.pass-checks-box{
+    border: 2px solid var(--primary-300);
+    padding: 10px;
+}

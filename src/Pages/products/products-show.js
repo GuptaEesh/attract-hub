@@ -4,10 +4,7 @@ import { useFilter } from '../../helpers/contexts/filter-context'
 export function ProductShow() {
     const { finalArray } = useFilter()
     return (
-        <div
-            className="flex  justify-space-around flex-wrap"
-            style={{ flex: 5 }}
-        >
+        <div className="flex products-section justify-space-around flex-wrap flex-5 gap-1">
             {finalArray.map((product) =>
                 product.inStock ? (
                     <Card

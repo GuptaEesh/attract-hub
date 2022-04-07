@@ -11,3 +11,42 @@
     height: 20rem;
     width: 30rem;
 }
+.loader-container{
+    width: var(--size-12);
+    height: var(--size-12);
+}
+.products-section{
+    padding: 10px;
+}
+.filter-dropdown{
+    background-color: var(--secondary-300);
+    box-shadow: inset 2px 2px 18px var(--white);
+    padding: 10px;
+    width:120px; 
+    display: none;
+}
+@media all and (max-width:720px) {
+    .filter-section{
+        flex:3;
+    }
+}
+@media all and (max-width:600px) {
+    .filter-section{
+        flex:4;
+    }
+}
+@media all and (max-width:500px) {
+    .filter-section{
+        flex-basis: 50vh;
+        padding: 1rem;
+        padding-top: 38vh;
+        margin-left: 10px;
+        overflow-y:scroll;
+    }
+    .product-filter-page{
+        flex-direction: column;
+    }
+    .filter-dropdown{
+        display: flex;
+    }
+}

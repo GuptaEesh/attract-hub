@@ -35,21 +35,15 @@ export function CartProducts({ cartItem }) {
         removeWishItem(dispatch, token, id, setPopup, setPopups)
     const addWish = () =>
         addWishItem(cartItem, dispatch, token, setPopup, setPopups)
+    const loaderContainer = {
+        width: 'var(--size-16)',
+        height: 'var(--size-16)',
+    }
     return (
         <div className="flex flex-row cart-product">
-            <img
-                style={{ width: '20%', height: '10rem' }}
-                className="hero-img"
-                src={image}
-            />
-            <section
-                style={{ paddingLeft: '1rem', width: '80%' }}
-                className=" bold justify-space-around flex flex-column align-space-between"
-            >
-                <div
-                    className="flex align-center justify-space-between"
-                    style={{ gap: '1rem' }}
-                >
+            <img className="hero-img" src={image} />
+            <section className="padding-left-1 bold width-p-80 justify-space-around flex flex-column align-space-between">
+                <div className="flex align-center justify-space-between gap-1">
                     <section className="flex flex-column">
                         <span>{name}</span>
                         <span className={fastDelivery ? 'sm text-blue' : 'sm'}>
@@ -63,12 +57,7 @@ export function CartProducts({ cartItem }) {
                         </span>
                     </section>
                     <section className="flex flex-column">
-                        <div
-                            style={{
-                                width: 'var(--size-16)',
-                                height: 'var(--size-16)',
-                            }}
-                        >
+                        <div style={loaderContainer}>
                             {cartloader ? (
                                 <Loading />
                             ) : (
@@ -80,12 +69,7 @@ export function CartProducts({ cartItem }) {
                                 </span>
                             )}
                         </div>
-                        <div
-                            style={{
-                                width: 'var(--size-16)',
-                                height: 'var(--size-16)',
-                            }}
-                        >
+                        <div style={loaderContainer}>
                             {' '}
                             {wishloader ? (
                                 <Loading />
@@ -123,19 +107,11 @@ export function CartProducts({ cartItem }) {
                             <select
                                 value={cartItem.qty}
                                 onChange={quantity}
-                                className="text-white bold md"
+                                className="text-white bold md qty-select"
                                 name="quantity"
                                 id="quantity"
-                                style={{
-                                    backgroundColor: 'transparent',
-                                    width: '3rem',
-                                }}
                             >
-                                <optgroup
-                                    style={{
-                                        backgroundColor: 'var(--primary-400)',
-                                    }}
-                                >
+                                <optgroup className="bg-black">
                                     {buyNumbers}
                                 </optgroup>
                             </select>

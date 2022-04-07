@@ -1,5 +1,5 @@
 import { Button, Input } from '../../atomic'
-import { LanguageDrop } from '../index'
+// import { LanguageDrop } from '../index'
 import React, { useState } from 'react'
 import '../NavBar/nav.css'
 import { BiSearchAlt } from 'react-icons/bi'
@@ -24,16 +24,16 @@ export function Nav() {
         position: 'absolute',
         right: 0,
     }
-    let wishlistCounter = wishItems.length
+    let wishlistCounter = wishItems?.length
     wishlistCounter = wishlistCounter > 100 ? '100+' : wishlistCounter
-    let cartCounter = items.reduce(
+    let cartCounter = items?.reduce(
         (totalItems, item) => (totalItems += Number(item.qty)),
         0
     )
     cartCounter = cartCounter > 100 ? '100+' : cartCounter
     return (
-        <header className="nav-bar with-shadow">
-            <div className="nav-section-left">
+        <header className="nav-bar flex align-center with-shadow justify-space-between">
+            <div className="nav-section-left flex-2">
                 <Link to="/">
                     <Button btnText="Home" btnType="secondary-link logo bold" />
                 </Link>
@@ -44,10 +44,7 @@ export function Nav() {
                     />
                 </Link>
             </div>
-            <section
-                className="flex align-center"
-                style={{ position: 'relative' }}
-            >
+            <section className="flex search-bar align-center position-relative">
                 <Input
                     inputValue={keyword}
                     inputFunc={(e) => setKeyword(e.target.value)}
@@ -63,42 +60,44 @@ export function Nav() {
                     }}
                 />
             </section>
-            <section className="flex align-center">
-                <LanguageDrop />
-                {!isAuthenticated ? (
-                    <Button
-                        btnType="primary bold btn md login without-shadow "
-                        btnText="->]"
-                        btnFunc={() => navigate('/login')}
-                    />
-                ) : (
-                    <Button
-                        btnType="primary bold btn md login without-shadow "
-                        btnText="[->"
-                        btnFunc={logout}
-                    />
-                )}
-            </section>
-            <div className="nav-section-right align-center">
-                <div className="icon-with-badge">
-                    <Link to="/wishlist">
-                        <span className="material-icons outlined lg">
-                            favorite
-                        </span>
+            <div className="secondary-nav-bar flex flex-4 gap-1 justify-space-between">
+                <section className="flex align-center">
+                    {/* <LanguageDrop />Will aplly it later on */}
+                    {!isAuthenticated ? (
+                        <Button
+                            btnType="primary bold btn md login without-shadow "
+                            btnText="->]"
+                            btnFunc={() => navigate('/login')}
+                        />
+                    ) : (
+                        <Button
+                            btnType="primary bold btn md login without-shadow "
+                            btnText="[->"
+                            btnFunc={logout}
+                        />
+                    )}
+                </section>
+                <div className="nav-section-right align-center gap-2">
+                    <div className="icon-with-badge">
+                        <Link to="/wishlist">
+                            <span className="material-icons outlined lg">
+                                favorite
+                            </span>
+                            <small className="text-center notification mat xsm">
+                                {wishlistCounter}
+                            </small>
+                        </Link>
+                    </div>
+                    <div className="icon-with-badge">
+                        <Link to="/cart">
+                            <span className="material-icons outlined lg">
+                                shopping_cart
+                            </span>
+                        </Link>
                         <small className="text-center notification mat xsm">
-                            {wishlistCounter}
+                            {cartCounter}
                         </small>
-                    </Link>
-                </div>
-                <div className="icon-with-badge">
-                    <Link to="/cart">
-                        <span className="material-icons outlined lg">
-                            shopping_cart
-                        </span>
-                    </Link>
-                    <small className="text-center notification mat xsm">
-                        {cartCounter}
-                    </small>
+                    </div>
                 </div>
             </div>
         </header>

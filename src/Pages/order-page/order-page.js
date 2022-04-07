@@ -8,15 +8,9 @@ export function OrdersPage() {
     return currentOrder && Object.keys(currentOrder).length === 0 ? (
         <Navigate to="/products" replace />
     ) : (
-        <div
-            className="flex align-center flex-column"
-            style={{ margin: '2rem', gap: '2rem' }}
-        >
+        <div className="flex align-center flex-column margin-2 gap-2">
             <h1>Congratulations! Your order has been successfully placed!</h1>
-            <div
-                className="flex align-center flex-column"
-                style={{ gap: '2rem' }}
-            >
+            <div className="flex align-center flex-column gap-2">
                 <h2 className="size-16">
                     Order id is{' '}
                     <span className="size-12">{currentOrder.id}</span>{' '}

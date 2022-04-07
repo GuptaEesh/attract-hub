@@ -45,3 +45,31 @@
 .select-address:active{
     cursor: grabbing;
 }
+.address-table{
+    background-color: var(--primary-400);
+}
+.address-details{  
+    padding-left: '10px' 
+}
+@media all and (max-width:570px) {
+    .address-field>td{
+        padding: 0;
+    }
+    .address-table{
+        margin:0;
+        padding: 0;
+        transform: rotateY(20deg);
+    }
+    .address-setter{
+     padding: 0;
+
+    }
+    .address-text{
+        max-width: 100px;
+    }
+}
+@media all and (max-width:400px) {
+    .address-text{
+        max-width: 50px;
+    }
+}

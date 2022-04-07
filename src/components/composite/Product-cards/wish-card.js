@@ -10,6 +10,7 @@ import {
 import { useAuth } from '../../../helpers/contexts/auth-context'
 import { Loading, SmallLoader } from '../Loader'
 import { useData } from '../../../helpers/contexts/data-context'
+import './cards.css'
 export function WishCard({ greyClass, product }) {
     let navigate = useNavigate()
     const [popup, setPopup] = useState({
@@ -29,14 +30,13 @@ export function WishCard({ greyClass, product }) {
         addCartItem(product, dispatch, token, setPopup, setPopups)
     const moveToCart = () => navigate('/cart')
     return (
-        <div style={{ position: 'relative' }}>
+        <div className="position-relative">
             <div
                 className={
                     !greyClass
                         ? 'eg-card ecomm-card'
                         : 'eg-card ecomm-card grey-card'
                 }
-                style={{ width: '12rem', marginLeft: 0 }}
             >
                 <header className="card-header bold justify-space-between">
                     <span className="flex flex-column sm">

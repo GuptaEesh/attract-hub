@@ -37,8 +37,7 @@ export function Login() {
             ) : (
                 <form
                     onSubmit={submitHandler}
-                    className=" flex glass flex-column text-white "
-                    style={{ padding: '2rem', gap: '1rem' }}
+                    className=" flex glass flex-column text-white padding-2 gap-1"
                 >
                     <InputSimple
                         title="Email"
@@ -67,12 +66,9 @@ export function Login() {
                         inputPlaceHolder="password..."
                     />
                     {error ? (
-                        <span
-                            className="flex align-center bold"
-                            style={{ color: 'var(--red-400)' }}
-                        >
+                        <span className="flex align-center bold text-red">
                             Wrong Credentials{' '}
-                            <AiFillWarning color="var(--red-400)" />
+                            <AiFillWarning className="text-red" />
                         </span>
                     ) : (
                         <span style={{ opacity: 0 }}>Validate</span>

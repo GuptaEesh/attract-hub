@@ -1,14 +1,8 @@
 import React from 'react'
-
+import '../login/login.css'
 export function PassChecker({ pass, confirmPass }) {
     return (
-        <div
-            className="flex flex-column"
-            style={{
-                border: '2px solid var(--primary-300)',
-                padding: '10px',
-            }}
-        >
+        <div className="flex flex-column pass-checks-box">
             <h2 className="size-12">Password Checks</h2>
             {
                 <p

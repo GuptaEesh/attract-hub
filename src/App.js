@@ -46,28 +46,42 @@ function App() {
                         <Route path="/products/:id" element={<ProductPage />} />
                         <Route
                             path="/cart"
-                            element={<PrivateRoute component={<Cart />} />}
+                            element={
+                                <PrivateRoute>
+                                    <Cart />
+                                </PrivateRoute>
+                            }
                         />
                         <Route
                             path="/wishlist"
-                            element={<PrivateRoute component={<WishList />} />}
+                            element={
+                                <PrivateRoute>
+                                    <WishList />
+                                </PrivateRoute>
+                            }
                         />
                         <Route
                             path="/checkout"
                             element={
-                                <PrivateRoute component={<CheckoutPage />} />
+                                <PrivateRoute>
+                                    <CheckoutPage />
+                                </PrivateRoute>
                             }
                         />
                         <Route
                             path="/manage-address"
                             element={
-                                <PrivateRoute component={<AddressManage />} />
+                                <PrivateRoute>
+                                    <AddressManage />
+                                </PrivateRoute>
                             }
                         />
                         <Route
                             path="/order_summary"
                             element={
-                                <PrivateRoute component={<OrdersPage />} />
+                                <PrivateRoute>
+                                    <OrdersPage />
+                                </PrivateRoute>
                             }
                         />
                     </Routes>

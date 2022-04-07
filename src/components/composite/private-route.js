@@ -2,7 +2,7 @@ import React from 'react'
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../../helpers/contexts/auth-context'
 
-export function PrivateRoute({ component }) {
+export function PrivateRoute({ children }) {
     const { isAuthenticated } = useAuth()
-    return isAuthenticated ? component : <Navigate to="/login" replace />
+    return isAuthenticated ? children : <Navigate to="/login" replace />
 }

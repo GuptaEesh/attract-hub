@@ -47,25 +47,21 @@ export function Filter() {
                 />
             </FilterHolder>
             <FilterHolder legendName="Price Range">
-                <label
-                    className="slider-track flex flex-column"
-                    style={{ gap: 'var(--size-12)' }}
-                >
+                <label className="slider-track flex flex-column gap-1">
                     <span className="sm bold">
                         {filters.range == 0 ? (
                             <>All Products</>
                         ) : (
-                            <>Product&apos;s price &lt; {filters.range * 1.5}</>
+                            <>Price &lt; {filters.range * 1.5}$</>
                         )}
                     </span>
                     <input
                         type="range"
                         style={{
-                            width: '80%',
                             background:
                                 filters.range == 0 && 'var(--primary-200)',
                         }}
-                        className="slider"
+                        className="slider width-p-80"
                         onChange={(e) => priceSliderHandler(e, dispatch)}
                         value={filters.range}
                     />

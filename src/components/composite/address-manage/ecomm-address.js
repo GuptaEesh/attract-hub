@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { AddressList } from './address-list'
 import { Form } from './address-form'
 import { useData } from '../../../helpers/contexts/data-context'
-
+import './address.css'
 export function AddressManage() {
     const [value, setValue] = useState({})
     const { dataHandler, dispatchData, setPopups } = useData()
@@ -93,14 +93,7 @@ export function AddressManage() {
         })
     }
     return (
-        <div
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1rem',
-                padding: '1rem',
-            }}
-        >
+        <div className="flex address-setter flex-column gap-1 padding-1">
             <Form
                 changeHandle={changeHandle}
                 handleSubmit={handleSubmit}
@@ -108,22 +101,13 @@ export function AddressManage() {
                 buttonText={btn}
             />
             <span className=" size-16 text-center bold">Added Addresses</span>
-            <section className="flex flex-column" style={{ gap: '1rem' }}>
-                <table
-                    className="text-white"
-                    style={{
-                        backgroundColor: 'var(--primary-400)',
-                        padding: '1rem',
-                    }}
-                >
+            <section className="flex flex-column table-container gap-1">
+                <table className="text-white padding-1 address-table">
                     <tbody>
                         <tr>
                             {['S.No.', 'Name', 'Address', 'PhoneNumber'].map(
                                 (item) => (
-                                    <td
-                                        style={{ paddingLeft: '10px' }}
-                                        key={item}
-                                    >
+                                    <td className="address-details" key={item}>
                                         {item}
                                     </td>
                                 )

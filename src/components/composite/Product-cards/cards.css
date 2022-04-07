@@ -1,3 +1,7 @@
+.eg-card.ecomm-card{    
+    width: 12rem;
+    margin-left: 0;
+}
 .eg-card.ecomm-card .material-icons:hover{
     animation: none;
 }
@@ -16,8 +20,8 @@
     z-index:2;
 }
 .category-cards{
-    height:calc(10px + 20vw - 14px);
-    width:calc(10px + 20vw - 20px);
+    height:15rem;
+    width:15rem;
     box-shadow: 0 0 8px var(--primary-400);
     border-radius: 10px;
 }
@@ -36,12 +40,20 @@
     width:60vw;
     box-shadow: 0 0 5px var(--primary-300)
 }
+.cart-product img{
+    width: 20%;
+    height: 10rem;
+}
 .cart-counter{
     width: 4rem ;
     background-color: var(--secondary-200);
     padding: 10px;
     border-radius: var(--size-16);
     box-shadow: 0 0 8px var(--secondary-200);
+}
+.qty-select{
+    background-color: transparent;
+    width: 3rem;
 }
 .empty-page-image{
     height:80vh;
@@ -55,4 +67,22 @@
     position:absolute;
     top:30%;
     z-index:2;
+}
+@media all and (max-width:1000px){
+    .category-cards{
+        transform: scale(0.8);
+    }
+    .category-cards:hover{
+        transform: scale(90%);
+    }
+}
+@media all and (max-width:800px){
+    .eg-card.ecomm-card{
+        height:28rem
+    }
+}
+@media all and (max-width:630px){
+    .cart-product{
+        width: 90vw;
+    }
 }

@@ -14,10 +14,10 @@ export function CategoryCard({
                 {title}
             </h2>
             <img
+                className="width-p-100 height-p-80"
                 src={imgSrc}
                 alt={productName}
                 loading="eager"
-                style={{ width: '100%', height: '80%' }}
             />
             <p>{content}</p>
         </div>

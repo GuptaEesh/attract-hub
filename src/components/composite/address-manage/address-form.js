@@ -21,6 +21,7 @@ export function Form({ buttonText, changeHandle, value, handleSubmit }) {
                     inputClass="input-text sm"
                     inputName="number"
                     inputValue={value.number}
+                    disabled={value.number?.length > 10}
                     inputType="number"
                     inputPlaceHolder="number"
                     inputFunc={changeHandle}

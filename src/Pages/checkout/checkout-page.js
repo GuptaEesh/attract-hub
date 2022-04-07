@@ -21,10 +21,7 @@ export function CheckoutPage() {
             {setTimeout(() => navigate('/products'), 1000)}
         </div>
     ) : (
-        <div
-            className="flex flex-column align-center justify-space-around"
-            style={{ padding: '2rem', gap: '1rem' }}
-        >
+        <div className="flex flex-column align-center justify-space-around gap-1 padding-2">
             <h2 className="size-16">Checkout Page ({items.length})</h2>
             <AddressField />
             {items.map((cartItem) => (
@@ -32,9 +29,7 @@ export function CheckoutPage() {
             ))}
             <h2> Checkout price - {totalPrice + delivery - discount}$</h2>
             {dataHandler.selectedAddress === '' ? (
-                <span className="bold" style={{ color: 'var(--red-400)' }}>
-                    Add Address Please !
-                </span> //Add a scroll to top button
+                <span className="bold text-red">Add Address Please !</span> //Add a scroll to top button
             ) : (
                 <span>Order now!</span>
             )}
@@ -47,7 +42,7 @@ export function CheckoutPage() {
                         type: 'ADD_TO_ORDER_SUMMARY',
                         payload: { id: uuid(), order: items },
                     }) //Have to empty cart on clicking this but backend doesn't support clear cart api.
-                    navigate('/order_summary')
+                    navigate('/order_summary', { replace: true })
                 }}
             />
         </div>

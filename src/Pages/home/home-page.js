@@ -23,12 +23,8 @@ export function Home() {
     useEffect(() => getCategories(setPopups, dispatchData), [])
     return (
         <div className="flex flex-column justify-space-between">
-            <div style={{ position: 'relative', marginBottom: '-5rem' }}>
-                <img
-                    src={carImg}
-                    alt="Exhaust image"
-                    className="img-responsive"
-                />
+            <div className="position-relative">
+                <img src={carImg} alt="Exhaust image" className="hero-img" />
                 <Button
                     btnText="Buy Exhausts"
                     btnType="tertiary bold products-button"
@@ -36,8 +32,8 @@ export function Home() {
                 />
             </div>
             <div
-                className="flex justify-space-around"
-                style={{ marginBottom: '10rem', width: '100%' }}
+                className="flex flex-wrap justify-space-around width-p-100 gap-1"
+                style={{ marginBottom: '10rem' }}
             >
                 {popups.loader ? (
                     <Loader />
