@@ -21,11 +21,7 @@ export function ProductListing() {
         window.addEventListener('resize', updateWindowWidth)
         if (screenwidth <= '500') setFilterOpen(false)
     }, [screenwidth])
-    useEffect(() => {
-        isFilterOpen
-            ? (document.body.style.overflow = 'hidden')
-            : (document.body.style.overflow = 'auto')
-    }, [isFilterOpen])
+
     return (
         <>
             {' '}
