@@ -20,6 +20,7 @@ export function ProductListing() {
     useEffect(() => {
         window.addEventListener('resize', updateWindowWidth)
         if (screenwidth <= '500') setFilterOpen(false)
+        else setFilterOpen(true)
     }, [screenwidth])
 
     return (
