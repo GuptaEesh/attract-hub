@@ -8,23 +8,23 @@ import './cart.css'
 import emptyCart from '../../images/empty-cart.svg'
 export function Cart() {
     const { items } = useCart()
-    let totalPrice = items.reduce(
+    let totalPrice = items?.reduce(
         (total, item) => (total += Number(item.price * item.qty)),
         0
     )
     let discount = Math.round(0.05 * totalPrice)
     let delivery = totalPrice > 200 ? 0 : Math.round(0.19 * totalPrice)
-    return items.length !== 0 ? (
+    return items?.length !== 0 ? (
         <div
             className="flex flex-wrap flex-row justify-space-around"
             style={{ paddingTop: '5rem' }}
         >
             <section style={{ backgroundColor: 'rgba(255,255,255,0.5)' }}>
                 <h1 className="bold size-16 margin-1">
-                    Shopping Cart ({items.length})
+                    Shopping Cart ({items?.length})
                 </h1>
 
-                {items.map((cartItem) => (
+                {items?.map((cartItem) => (
                     <CartProducts key={cartItem._id} cartItem={cartItem} />
                 ))}
             </section>

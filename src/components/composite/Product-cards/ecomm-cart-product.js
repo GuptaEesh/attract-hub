@@ -73,7 +73,7 @@ export function CartProducts({ cartItem }) {
                             {' '}
                             {wishloader ? (
                                 <Loading />
-                            ) : wishItems.find(
+                            ) : wishItems?.find(
                                   (item) => item.id === cartItem.id
                               ) ? (
                                 <span

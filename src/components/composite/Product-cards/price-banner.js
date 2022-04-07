@@ -64,13 +64,9 @@ export function PriceBanner({
                 </table>
             </section>
 
-            <a href="./checkout.html">
-                <Link to="/checkout">
-                    <button className="primary btn without-shadow">
-                        Checkout
-                    </button>
-                </Link>
-            </a>
+            <Link to="/checkout">
+                <button className="primary btn without-shadow">Checkout</button>
+            </Link>
         </div>
     )
 }
