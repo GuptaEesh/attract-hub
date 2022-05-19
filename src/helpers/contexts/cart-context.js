@@ -15,9 +15,10 @@ function CartProvider({ children }) {
     const items = cart.cartItems
     const wishItems = cart.wishListItems
     const currentOrder = cart.currentOrder
+    const orderSummary = cart.orderSummary
     return (
         <CartContext.Provider
-            value={{ items, wishItems, currentOrder, dispatch }}
+            value={{ items, wishItems, orderSummary, currentOrder, dispatch }}
         >
             {children}
         </CartContext.Provider>

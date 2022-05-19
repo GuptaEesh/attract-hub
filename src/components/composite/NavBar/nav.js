@@ -1,21 +1,20 @@
 import { Button, Input } from '../../atomic'
-// import { LanguageDrop } from '../index'
 import React, { useState } from 'react'
 import '../NavBar/nav.css'
 import { BiSearchAlt } from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../../../helpers/contexts/cart-context'
-import { useAuth } from '../../../helpers/contexts/auth-context'
 import { resetFilters } from '../../../Pages/products/Filter/filter-controller'
 import { useFilter } from '../../../helpers/contexts/filter-context'
-// use profile image here
 export function Nav() {
     const { items, wishItems } = useCart()
     const { dispatch } = useFilter()
     const [keyword, setKeyword] = useState()
-    const { logout, isAuthenticated } = useAuth()
     const navigate = useNavigate()
     let searchBtnStyle = {
+        paddingRight: '5px',
+        width: '2rem',
+        paddingLeft: '5px',
         borderRadius: '10px',
         height: '100%',
         color: 'var(--secondary-300)',
@@ -56,50 +55,36 @@ export function Nav() {
                     style={searchBtnStyle}
                     onClick={() => {
                         resetFilters(dispatch)
-                        navigate(`/${keyword}`)
+                        navigate(`/search/${keyword}`)
                     }}
                 />
             </section>
-            <div className="secondary-nav-bar flex flex-4 gap-1 justify-space-between">
-                <section className="flex align-center">
-                    {/* <LanguageDrop />Will aplly it later on */}
-                    {!isAuthenticated ? (
-                        <Button
-                            btnType="primary bold btn md login without-shadow "
-                            btnText="->]"
-                            btnFunc={() => navigate('/login')}
-                        />
-                    ) : (
-                        <Button
-                            btnType="primary bold btn md login without-shadow "
-                            btnText="[->"
-                            btnFunc={logout}
-                        />
-                    )}
-                </section>
-                <div className="nav-section-right align-center gap-2">
-                    <div className="icon-with-badge">
-                        <Link to="/wishlist">
-                            <span className="material-icons outlined lg">
-                                favorite
-                            </span>
-                            <small className="text-center notification mat xsm">
-                                {wishlistCounter}
-                            </small>
-                        </Link>
-                    </div>
-                    <div className="icon-with-badge">
-                        <Link to="/cart">
-                            <span className="material-icons outlined lg">
-                                shopping_cart
-                            </span>
-                        </Link>
+            <div className="nav-section-right flex align-center justify-flex-end flex-2 gap-1">
+                <Link to="/profile" className="bold ">
+                    Account
+                </Link>
+                <div className="icon-with-badge">
+                    <Link to="/wishlist">
+                        <span className="material-icons outlined lg">
+                            favorite
+                        </span>
                         <small className="text-center notification mat xsm">
-                            {cartCounter}
+                            {wishlistCounter}
                         </small>
-                    </div>
+                    </Link>
+                </div>
+                <div className="icon-with-badge">
+                    <Link to="/cart">
+                        <span className="material-icons outlined lg">
+                            shopping_cart
+                        </span>
+                    </Link>
+                    <small className="text-center notification mat xsm">
+                        {cartCounter}
+                    </small>
                 </div>
             </div>
+            {/* </div> */}
         </header>
     )
 }

@@ -15,6 +15,10 @@ import {
     Cart,
     Login,
     SignUp,
+    ProfilePage,
+    ProfileInfo,
+    Orders,
+    Settings,
 } from './Pages'
 import { FilterProvider } from './helpers/contexts/filter-context'
 import { MyToast } from './components/atomic'
@@ -39,10 +43,12 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/login" element={<Login />} />
-                        <Route path="*" element={<ErrorPage />} />
                         <Route path="/signup" element={<SignUp />} />
                         <Route path="/products" element={<ProductListing />} />
-                        <Route path="/:keyword" element={<SearchPage />} />
+                        <Route
+                            path="/search/:keyword"
+                            element={<SearchPage />}
+                        />
                         <Route path="/products/:id" element={<ProductPage />} />
                         <Route
                             path="/cart"
@@ -84,6 +90,40 @@ function App() {
                                 </PrivateRoute>
                             }
                         />
+                        <Route
+                            path="/profile"
+                            element={
+                                <PrivateRoute>
+                                    <ProfilePage />
+                                </PrivateRoute>
+                            }
+                        >
+                            <Route
+                                path="/profile/"
+                                element={
+                                    <PrivateRoute>
+                                        <ProfileInfo />
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route
+                                path="/profile/orders"
+                                element={
+                                    <PrivateRoute>
+                                        <Orders />
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route
+                                path="/profile/settings"
+                                element={
+                                    <PrivateRoute>
+                                        <Settings />
+                                    </PrivateRoute>
+                                }
+                            />
+                        </Route>
+                        <Route path="*" element={<ErrorPage />} />
                     </Routes>
                 </CartProvider>
             </FilterProvider>

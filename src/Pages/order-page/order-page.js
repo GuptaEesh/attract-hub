@@ -20,7 +20,7 @@ export function OrdersPage() {
                     btnText="Shop More"
                     btnFunc={() => {
                         dispatch({ type: 'ORDER_CONFIRMED' })
-                        navigate('/products')
+                        navigate('/profile')
                     }}
                 />
             </div>
