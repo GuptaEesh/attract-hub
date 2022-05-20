@@ -30,7 +30,6 @@
         flex-direction: column;
         height: 20vh;
         gap: 1rem;
-        
     }
     .nav-section-left{
         width:100%;
@@ -45,12 +44,10 @@
         width: 100%;
         margin:0
     }
-    
-    .secondary-nav-bar{
-        width: 100%;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 10px;
+    .nav-section-right{
+        width:100%;
+       justify-content: space-around;
     }
+
 }
  

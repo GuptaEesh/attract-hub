@@ -8,8 +8,11 @@ const cartItemsReducer = (cart, action) => {
         case 'ADD_TO_ORDER_SUMMARY':
             return {
                 ...cart,
-                currentOrder: action.payload,
-                orderSummary: [...cart.orderSummary, action.payload],
+                currentOrder: { id: action.payload.id },
+                orderSummary: [
+                    ...cart.orderSummary,
+                    { id: action.payload.id, orders: action.payload.order },
+                ],
             }
         case 'MANIPULATE_BAG':
             return { ...cart, cartItems: action.payload }
