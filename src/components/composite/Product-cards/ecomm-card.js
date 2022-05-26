@@ -1,6 +1,6 @@
 import { Button } from '../../atomic'
 import { FaShippingFast } from 'react-icons/fa'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
 import { useCart } from '../../../helpers/contexts/cart-context'
 import './cards.css'
@@ -14,6 +14,7 @@ import { Loading, SmallLoader } from '../Loader'
 import { useData } from '../../../helpers/contexts/data-context'
 export function Card({ greyClass, product }) {
     let navigate = useNavigate()
+    const location = useLocation()
     const { image, inStock, brand, id, name, price, ratings, fastDelivery } =
         product
     const { items, dispatch, wishItems } = useCart()
@@ -27,15 +28,15 @@ export function Card({ greyClass, product }) {
     const addWish = () =>
         isAuthenticated
             ? addWishItem(product, dispatch, token, setPopup, setPopups)
-            : navigate('/login')
+            : navigate('/login', { state: { from: location } })
     const addCartProduct = () =>
         isAuthenticated
             ? addCartItem(product, dispatch, token, setPopup, setPopups)
-            : navigate('/login')
+            : navigate('/login', { state: { from: location } })
     const removeWish = (id) =>
         isAuthenticated
             ? removeWishItem(dispatch, token, id, setPopup, setPopups)
-            : navigate('/login')
+            : navigate('/login', { state: { from: location } })
     const moveToCart = () => navigate('/cart')
     return (
         <div className="position-relative height-max-content">

@@ -1,7 +1,6 @@
 export { AddressManage } from './address-manage/ecomm-address'
 export { AddressField } from './address-manage/address-field'
-export { Loading,SmallLoader,Loader } from './Loader'
-export {PrivateRoute} from './private-route'
+export { Loading, SmallLoader, Loader } from './Loader'
 export { InputPass } from './inputbox/input-password'
 export { InputSimple } from './inputbox/input-simple'
 export {

@@ -1,5 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import { Input, MyToast } from '../../components/atomic'
 import { PassChecker } from './pass-checker'
 import { InputPass, InputSimple, Loader } from '../../components/composite'
@@ -17,15 +17,13 @@ export function SignUp() {
         message: '',
         loader: false,
     }
-    const navigate = useNavigate()
 
-    const { login, isAuthenticated } = useAuth()
+    const { login } = useAuth()
     const [formFields, setFormFields] = useState(initial)
     const { name, email, password, confirmPass, error, message, loader } =
         formFields
     const submitHandler = (e) =>
         signUpHandler(e, setFormFields, login, formFields)
-    useEffect(() => (isAuthenticated ? navigate('/') : ''), [isAuthenticated])
     return error ? (
         <div className="login-page flex flex-column">
             <MyToast message={message} alertType="danger-alert" />

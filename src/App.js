@@ -1,6 +1,6 @@
 import './App.css'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import { AddressManage, Nav, PrivateRoute } from './components/composite'
+import { AddressManage, Nav } from './components/composite'
 import { CartProvider } from './helpers/contexts/cart-context'
 import { useData } from './helpers/contexts/data-context'
 import {
@@ -22,6 +22,8 @@ import {
 } from './Pages'
 import { FilterProvider } from './helpers/contexts/filter-context'
 import { MyToast } from './components/atomic'
+import { RedirectAuth } from './helpers/route/redirect-auth'
+import { RequireAuth } from './helpers/route/require-auth'
 
 function App() {
     const location = useLocation()
@@ -42,86 +44,45 @@ function App() {
                     )}
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/signup" element={<SignUp />} />
+                        <Route element={<RedirectAuth />}>
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/signup" element={<SignUp />} />
+                        </Route>
                         <Route path="/products" element={<ProductListing />} />
                         <Route
                             path="/search/:keyword"
                             element={<SearchPage />}
                         />
                         <Route path="/products/:id" element={<ProductPage />} />
-                        <Route
-                            path="/cart"
-                            element={
-                                <PrivateRoute>
-                                    <Cart />
-                                </PrivateRoute>
-                            }
-                        />
-                        <Route
-                            path="/wishlist"
-                            element={
-                                <PrivateRoute>
-                                    <WishList />
-                                </PrivateRoute>
-                            }
-                        />
-                        <Route
-                            path="/checkout"
-                            element={
-                                <PrivateRoute>
-                                    <CheckoutPage />
-                                </PrivateRoute>
-                            }
-                        />
-                        <Route
-                            path="/manage-address"
-                            element={
-                                <PrivateRoute>
-                                    <AddressManage />
-                                </PrivateRoute>
-                            }
-                        />
-                        <Route
-                            path="/order_summary"
-                            element={
-                                <PrivateRoute>
-                                    <OrdersPage />
-                                </PrivateRoute>
-                            }
-                        />
-                        <Route
-                            path="/profile"
-                            element={
-                                <PrivateRoute>
-                                    <ProfilePage />
-                                </PrivateRoute>
-                            }
-                        >
+                        <Route element={<RequireAuth />}>
+                            <Route path="/cart" element={<Cart />} />
+                            <Route path="/wishlist" element={<WishList />} />
                             <Route
-                                path="/profile/"
-                                element={
-                                    <PrivateRoute>
-                                        <ProfileInfo />
-                                    </PrivateRoute>
-                                }
+                                path="/checkout"
+                                element={<CheckoutPage />}
                             />
                             <Route
-                                path="/profile/orders"
-                                element={
-                                    <PrivateRoute>
-                                        <Orders />
-                                    </PrivateRoute>
-                                }
+                                path="/manage-address"
+                                element={<AddressManage />}
                             />
                             <Route
-                                path="/profile/settings"
-                                element={
-                                    <PrivateRoute>
-                                        <Settings />
-                                    </PrivateRoute>
-                                }
+                                path="/order_summary"
+                                element={<OrdersPage />}
                             />
+                            <Route path="/profile" element={<ProfilePage />}>
+                                <Route
+                                    path="/profile/"
+                                    element={<ProfileInfo />}
+                                />
+                                <Route
+                                    path="/profile/orders"
+                                    element={<Orders />}
+                                />
+                                <Route
+                                    path="/profile/settings"
+                                    element={<Settings />}
+                                />
+                            </Route>
                         </Route>
                         <Route path="*" element={<ErrorPage />} />
                     </Routes>

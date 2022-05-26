@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { Button } from '../../components/atomic'
 import { Loading, SmallLoader } from '../../components/composite'
@@ -14,6 +14,7 @@ import {
 } from '../../helpers/utils'
 export function ProductPage() {
     let navigate = useNavigate()
+    const location = useLocation()
     const { dataHandler, setPopups, dispatchData } = useData()
     useEffect(() => getProducts(setPopups, dispatchData), [dataHandler])
     const { items, dispatch, wishItems } = useCart()
@@ -29,15 +30,15 @@ export function ProductPage() {
     const addCartProduct = () =>
         isAuthenticated
             ? addCartItem(product, dispatch, token, setPopup, setPopups)
-            : navigate('/login')
+            : navigate('/login', { state: { from: location } })
     const addWish = () =>
         isAuthenticated
             ? addWishItem(product, dispatch, token, setPopup, setPopups)
-            : navigate('/login')
+            : navigate('/login', { state: { from: location } })
     const removeWish = (id) =>
         isAuthenticated
             ? removeWishItem(dispatch, token, id, setPopup, setPopups)
-            : navigate('/login')
+            : navigate('/login', { state: { from: location } })
     const { isAuthenticated, token } = useAuth()
     return dataHandler.data
         ?.filter((product) => product.id === id)
@@ -77,11 +78,11 @@ export function ProductPage() {
                         <p className="size-12">{price}$/-</p>
 
                         <label className="flex">
-                            <span className="bold">{ratings}</span>{' '}
+                            <span className="bold">{ratings}</span>
                             <input
                                 className="rating-star"
                                 type="checkbox"
-                                checked
+                                defaultChecked
                             />
                             <span className="material-icons outlined lg rating-star-icon">
                                 star
