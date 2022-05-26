@@ -7,7 +7,12 @@ const dataReducer = (dataHandler, action) => {
                       selectedAddress: '',
                       addresses: action.payload,
                   }
-                : { ...dataHandler, addresses: action.payload }
+                : {
+                      ...dataHandler,
+                      addresses: action.payload,
+                      selectedAddress:
+                          action.payload[action.payload.length - 1],
+                  }
         case 'ADDRESS_UPDATE':
             return { ...dataHandler, selectedAddress: action.payload }
         case 'ADD_PRODUCTS':

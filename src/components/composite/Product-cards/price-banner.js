@@ -1,35 +1,25 @@
 import { Link } from 'react-router-dom'
-import { Button } from '../../atomic'
+// import { Button } from '../../atomic'
 
 export function PriceBanner({
     totalPrice = 1000,
     delivery = 10,
-    coupon = 20,
     discount = 5,
 }) {
     return (
         <div className="eg-card card-one justify-space-around">
-            {totalPrice > 200 && (
+            {totalPrice > 200 ? (
                 <p>
-                    This is eligible for <span className="text-blue">Free</span>{' '}
+                    This is eligible for{' '}
+                    <span className="text-blue">Free </span>
                     delivery.
                 </p>
+            ) : (
+                <p>
+                    Your cart seems light, mind adding more items😂. Just
+                    kidding, go for it!
+                </p>
             )}
-            <header className="bold">
-                {' '}
-                Coupons
-                <Button
-                    btnType="secondary btn"
-                    btnText={
-                        <>
-                            <span className="material-icons outlined md">
-                                local_offer
-                            </span>{' '}
-                            Coupons
-                        </>
-                    }
-                />
-            </header>
             <h2>Price Details:</h2>
             <section>
                 <table>
@@ -51,13 +41,9 @@ export function PriceBanner({
                             </td>
                         </tr>
                         <tr>
-                            <td className="sm">Coupon Code:</td>
-                            <td className="sm">{coupon}$</td>
-                        </tr>
-                        <tr>
                             <td className="bold size-12">Total Amount:</td>
                             <td className="bold size-12">
-                                {totalPrice + delivery - coupon - discount}$
+                                {totalPrice + delivery - discount}$
                             </td>
                         </tr>
                     </tbody>
