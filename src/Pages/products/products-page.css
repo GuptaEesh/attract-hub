@@ -5,7 +5,7 @@
     position: sticky;
     flex: 1 1 10%;
     background-color: var(--primary-100);
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 .product-image{
     height: 20rem;

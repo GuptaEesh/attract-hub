@@ -34,12 +34,15 @@ export function Nav() {
         <header className="nav-bar flex align-center with-shadow justify-space-between">
             <div className="nav-section-left flex-2">
                 <Link to="/">
-                    <Button btnText="Home" btnType="secondary-link logo bold" />
+                    <Button
+                        btnText="Home"
+                        btnType="secondary-link cursor-pointer logo bold"
+                    />
                 </Link>
                 <Link to="/products">
                     <Button
                         btnText="Sh🔹p"
-                        btnType="secondary-link logo bold"
+                        btnType="secondary-link logo bold cursor-pointer"
                     />
                 </Link>
             </div>

@@ -93,7 +93,6 @@ export function Filter() {
                 ))}
             </FilterHolder>
             <FilterHolder legendName="Ratings Filter">
-                {' '}
                 {[1, 2, 3, 4].map((i) => (
                     <div
                         key={i.toString()}
