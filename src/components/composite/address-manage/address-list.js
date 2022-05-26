@@ -5,7 +5,7 @@ import { GrSelect } from 'react-icons/gr'
 import { useData } from '../../../helpers/contexts/data-context'
 import './address.css'
 export function AddressList({ edit, deleteAddress }) {
-    const { dispatchData, dataHandler } = useData()
+    const { dispatchData, dataHandler, setPopups } = useData()
     const navigate = useNavigate()
     return dataHandler.addresses.map((address, index) => (
         <tr key={address.id} className="address-field">
@@ -17,6 +17,24 @@ export function AddressList({ edit, deleteAddress }) {
                         payload: address,
                     })
                     setTimeout(() => navigate('/checkout'), 200)
+                    setTimeout(
+                        () =>
+                            setPopups((popups) => ({
+                                ...popups,
+                                toast: true,
+                                toastMessage: 'Updated the address',
+                                toastType: 'success-alert',
+                            })),
+                        0
+                    )
+                    setTimeout(
+                        () =>
+                            setPopups((popups) => ({
+                                ...popups,
+                                toast: false,
+                            })),
+                        500
+                    )
                 }}
             >
                 <p className="address-text size-12">{index + 1}.</p>

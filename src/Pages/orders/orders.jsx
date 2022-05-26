@@ -5,7 +5,6 @@ import '../profile-page/profile-page.css'
 
 const Orders = () => {
     const { orderSummary } = useCart()
-    console.log(orderSummary)
     return (
         <article className="orders-page">
             <h1 className="details-heading">Order Details</h1>
@@ -21,14 +20,29 @@ const Orders = () => {
                         </Link>
                     </h1>
                 ) : (
-                    orderSummary?.map(({ id, orders }) => (
+                    orderSummary?.map(({ id, payment_id, orders, payment }) => (
                         <div key={id} className="order-specific-summary">
-                            <span>
+                            <div>
                                 Order Id:- <span className="bold">{id}</span>
-                            </span>
+                            </div>
+                            <div>
+                                Payment Id:-
+                                <span className="bold">{payment_id}</span>
+                            </div>
+                            <div>
+                                Total Price:-
+                                <span className="bold">{payment}$</span>
+                            </div>
                             <section className="margin-1 flex flex-column gap-2">
                                 {orders.map(
-                                    ({ _id, image, name, brand, qty }) => (
+                                    ({
+                                        _id,
+                                        image,
+                                        name,
+                                        brand,
+                                        qty,
+                                        price,
+                                    }) => (
                                         <div
                                             key={_id}
                                             className="flex flex-row gap-2 order-product"
@@ -37,11 +51,16 @@ const Orders = () => {
                                                 className="hero-img"
                                                 src={image}
                                             />
-                                            <section className="flex flex-column item-info gap-2">
-                                                <h4>{name}</h4>
+                                            <section className="flex flex-column item-info gap-1">
+                                                <h4 className="flex flex-column">
+                                                    {name}
+                                                    <small>
+                                                        ${price}/piece
+                                                    </small>
+                                                </h4>
                                                 <small>{brand}</small>
                                                 <p className="bold">
-                                                    Qty :- {qty}
+                                                    Qty : {qty}
                                                 </p>
                                             </section>
                                         </div>

@@ -4,10 +4,11 @@ import { AddressList } from './address-list'
 import { Form } from './address-form'
 import { useData } from '../../../helpers/contexts/data-context'
 import './address.css'
+import { useNavigate } from 'react-router-dom'
 export function AddressManage() {
     const [value, setValue] = useState({})
     const { dataHandler, dispatchData, setPopups } = useData()
-
+    const navigate = useNavigate()
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
@@ -25,17 +26,7 @@ export function AddressManage() {
                     toastMessage: 'Added address',
                     toastType: 'success-alert',
                 })),
-            500
-        )
-        setTimeout(
-            () =>
-                setPopups((popups) => ({
-                    ...popups,
-                    toast: true,
-                    toastMessage: 'Please select the address below',
-                    toastType: 'neutral-alert',
-                })),
-            1200
+            0
         )
         setTimeout(
             () =>
@@ -43,7 +34,7 @@ export function AddressManage() {
                     ...popups,
                     toast: false,
                 })),
-            1500
+            700
         )
 
         let newAddress = dataHandler.addresses.map((addressCheck) => {
@@ -66,6 +57,7 @@ export function AddressManage() {
             ]
         dispatchData({ type: 'ADD_ADDRESS', payload: newAddress })
         setValue({ name: '', number: '', livingAddress: '' })
+        navigate('/checkout')
     }
 
     let [btn, setBtn] = useState('Add')

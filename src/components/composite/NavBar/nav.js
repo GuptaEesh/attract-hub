@@ -48,8 +48,8 @@ export function Nav() {
                     inputValue={keyword}
                     inputFunc={(e) => setKeyword(e.target.value)}
                     inputType="text"
-                    inputClass="input-text md"
-                    inputPlaceHolder="Search..."
+                    inputClass="input-text sm"
+                    inputPlaceHolder="Click on glass after typing..."
                 />
                 <BiSearchAlt
                     style={searchBtnStyle}
