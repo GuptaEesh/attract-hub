@@ -9,12 +9,16 @@ const initialData = {
 const AuthProvider = ({ children }) => {
     const [authToken, setAuthToken] = useState(initialData)
     const navigate = useNavigate()
-
     const isAuthenticated = authToken.token ? true : false
-    const login = (data) => {
+    const login = (data, mode = 'login') => {
         localStorage.setItem('token', JSON.stringify(data.encodedToken))
-        localStorage.setItem('userData', JSON.stringify(data.foundUser))
-        setAuthToken({ token: data.encodedToken, data: data.foundUser })
+        mode === 'login'
+            ? localStorage.setItem('userData', JSON.stringify(data.foundUser))
+            : localStorage.setItem('userData', JSON.stringify(data.createdUser))
+        setAuthToken({
+            token: data.encodedToken,
+            data: mode === 'login' ? data.foundUser : data.createdUser,
+        })
     }
 
     const logout = () => {

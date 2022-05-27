@@ -40,7 +40,6 @@ export function SignUp() {
                     onSubmit={submitHandler}
                     className="flex glass flex-column padding-2 gap-1"
                 >
-                    {' '}
                     <InputSimple
                         title="Name"
                         inputClass="input-text md"
