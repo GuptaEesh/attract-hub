@@ -13,7 +13,7 @@ const signUpHandler = async (e, setFormFields, login, formFields) => {
             password,
         })
         setFormFields({ ...formFields, loader: false })
-        login(response.data)
+        login(response.data, 'signup')
     } catch (err) {
         setFormFields({
             ...formFields,
