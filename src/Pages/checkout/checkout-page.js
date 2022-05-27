@@ -46,7 +46,7 @@ export function CheckoutPage() {
         // Did it using dollars but it would have been difficult for the project reviewer to navigate to a successful transaction.
         const options = {
             key: 'rzp_test_BwWY3GrNLhnHWZ',
-            amount: (totalPrice + delivery - discount) * 100,
+            amount: (totalPrice + delivery - discount) * 100 * 80,
             currency: 'INR',
             name: 'Attract Hub',
             description: 'Thank you for shopping with us',
