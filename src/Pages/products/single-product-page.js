@@ -97,10 +97,14 @@ export function ProductPage() {
                             ad aperiam, quas aut natus!
                         </p>
                         <div className="flex align-center">
-                            <Button
-                                btnType="secondary btn sm"
-                                btnText="Talk to Seller"
-                            />
+                            <a
+                                href="https://wa.me/+917015887787"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="secondary btn md"
+                            >
+                                Talk to Seller
+                            </a>
 
                             {items?.find((item) => item.id === id) ? (
                                 <Button

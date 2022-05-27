@@ -19,18 +19,31 @@ export function WishCard({ greyClass, product }) {
     })
     const { cartloader, wishloader } = popup
     const { token } = useAuth()
-    const { image, brand, name, price, ratings } = product
+    const { image, brand, name, price, ratings, id } = product
     const { items, dispatch, wishItems } = useCart()
     const { setPopups } = useData()
-    const addWish = () =>
+    const addWish = (e) => {
+        e.stopPropagation()
         addWishItem(product, dispatch, token, setPopup, setPopups)
-    const removeWish = (id) =>
+    }
+    const removeWish = (e, id) => {
+        e.stopPropagation()
         removeWishItem(dispatch, token, id, setPopup, setPopups)
-    const addCartProduct = () =>
+    }
+    const addCartProduct = (e) => {
+        e.stopPropagation()
         addCartItem(product, dispatch, token, setPopup, setPopups)
-    const moveToCart = () => navigate('/cart')
+    }
+    const moveToCart = (e) => {
+        e.stopPropagation()
+        navigate('/cart')
+    }
+    const singleProductPage = () => navigate(`/products/${id}`)
     return (
-        <div className="position-relative">
+        <div
+            className={`position-relative ${!greyClass && 'cursor-pointer'}`}
+            onClick={!greyClass && singleProductPage}
+        >
             <div
                 className={
                     !greyClass
@@ -48,7 +61,7 @@ export function WishCard({ greyClass, product }) {
                     ) : wishItems.find((item) => item.id === product.id) ? (
                         <span
                             className="material-icons text-blue"
-                            onClick={() => removeWish(product._id)}
+                            onClick={(e) => removeWish(e, product._id)}
                         >
                             favorite
                         </span>
@@ -81,8 +94,8 @@ export function WishCard({ greyClass, product }) {
                 {items.find((item) => item.id === product.id) ? (
                     <Button
                         btnFunc={moveToCart}
-                        btnText={'Go To Cart'}
-                        btnType="tertiary bold btn without-shadow"
+                        btnText="Go To Cart"
+                        btnType="secondary bold btn width-p-100"
                     />
                 ) : (
                     <Button

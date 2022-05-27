@@ -21,15 +21,14 @@ export function Filter() {
 
     return (
         <div className="flex flex-column justify-space-around filter-section">
-            <section className="flex justify-space-between flex-wrap">
+            <section className="flex justify-space-between flex-wrap padding-1">
                 <h1> Filters </h1>
                 <button
                     className="text-underline text-blue"
                     style={{ background: 'transparent' }}
                     onClick={() => resetFilters(dispatch)}
                 >
-                    {' '}
-                    Clear Filters{' '}
+                    Clear Filters
                 </button>
             </section>
             <FilterHolder legendName="Price Sort">

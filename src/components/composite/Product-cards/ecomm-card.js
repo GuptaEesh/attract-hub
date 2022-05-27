@@ -25,21 +25,36 @@ export function Card({ greyClass, product }) {
     })
     const { cartloader, wishloader } = popup
     const { isAuthenticated, token } = useAuth()
-    const addWish = () =>
+    const addWish = (e) => {
+        e.stopPropagation()
         isAuthenticated
             ? addWishItem(product, dispatch, token, setPopup, setPopups)
             : navigate('/login', { state: { from: location } })
-    const addCartProduct = () =>
+    }
+    const addCartProduct = (e) => {
+        e.stopPropagation()
         isAuthenticated
             ? addCartItem(product, dispatch, token, setPopup, setPopups)
             : navigate('/login', { state: { from: location } })
-    const removeWish = (id) =>
+    }
+    const removeWish = (id, e) => {
+        e.stopPropagation()
         isAuthenticated
             ? removeWishItem(dispatch, token, id, setPopup, setPopups)
             : navigate('/login', { state: { from: location } })
-    const moveToCart = () => navigate('/cart')
+    }
+    const moveToCart = (e) => {
+        e.stopPropagation()
+        navigate('/cart')
+    }
+    const singleProductPage = () => navigate(`/products/${id}`)
     return (
-        <div className="position-relative height-max-content">
+        <div
+            onClick={!greyClass && singleProductPage}
+            className={`position-relative height-max-content ${
+                !greyClass && 'cursor-pointer'
+            }`}
+        >
             {fastDelivery && inStock && (
                 <h2 className="bold justify-center flex align-center card-tag">
                     Fast <FaShippingFast size="1rem" color="var(--white)" />
@@ -58,13 +73,13 @@ export function Card({ greyClass, product }) {
                     src={image}
                     loading="lazy"
                 />
-                {!greyClass && (
+                {/* {!greyClass && (
                     <Button
                         btnText="See Details"
                         btnType="tertiary btn product-detail-btn bold md"
                         btnFunc={() => navigate(`/products/${id}`)}
                     />
-                )}
+                )} */}
                 <header className="card-header bold justify-space-between">
                     <span className="flex flex-column sm">
                         {name}
@@ -75,7 +90,7 @@ export function Card({ greyClass, product }) {
                     ) : wishItems?.find((item) => item.id === product.id) ? (
                         <span
                             className="material-icons text-blue"
-                            onClick={() => removeWish(product._id)}
+                            onClick={(e) => removeWish(product._id, e)}
                         >
                             favorite
                         </span>
@@ -87,13 +102,13 @@ export function Card({ greyClass, product }) {
                 </header>
                 <section className="product-info">
                     <span className="bold size-12">
-                        {price}${' '}
+                        {price}$
                         <span className="md light text-strike">
                             {Math.round(price * 1.3)}$
                         </span>
                     </span>
                     <div className="flex align-center bold">
-                        {ratings}{' '}
+                        {ratings}
                         <span className="material-icons text-blue outlined">
                             star
                         </span>
@@ -104,7 +119,7 @@ export function Card({ greyClass, product }) {
                     <Button
                         btnFunc={moveToCart}
                         btnText={'Go To Cart'}
-                        btnType="tertiary bold btn without-shadow"
+                        btnType="secondary width-p-100 bold btn"
                     />
                 ) : (
                     <Button

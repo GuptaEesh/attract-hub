@@ -3,7 +3,7 @@
     height: 100vh;
     top: 0;
     position: sticky;
-    flex: 1 1 10%;
+    flex: 1;
     background-color: var(--primary-100);
     overflow-y: auto;
 }
