@@ -4,7 +4,6 @@ import { useAuth } from '../contexts/auth-context'
 const RedirectAuth = () => {
     const { isAuthenticated } = useAuth()
     const location = useLocation()
-    console.log(location?.state?.from.pathname)
     return isAuthenticated ? (
         <Navigate
             to={location?.state?.from?.pathname ?? '/'}
