@@ -19,8 +19,8 @@ export function Login() {
     const guestLogin = () =>
         setFormFields({
             ...formFields,
-            email: 'adarshbalika@gmail.com',
-            password: 'adarshbalika',
+            email: 'attractCustomer@gmail.com',
+            password: 'attract/hub',
         })
 
     const submitHandler = (e) =>
