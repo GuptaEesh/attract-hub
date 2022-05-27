@@ -6,8 +6,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../../../helpers/contexts/cart-context'
 import { resetFilters } from '../../../Pages/products/Filter/filter-controller'
 import { useFilter } from '../../../helpers/contexts/filter-context'
+import { useAuth } from '../../../helpers/contexts/auth-context'
 export function Nav() {
     const { items, wishItems } = useCart()
+    const { isAuthenticated } = useAuth()
     const { dispatch } = useFilter()
     const [keyword, setKeyword] = useState()
     const navigate = useNavigate()
@@ -71,9 +73,11 @@ export function Nav() {
                         <span className="material-icons outlined lg">
                             favorite
                         </span>
-                        <small className="text-center notification mat xsm">
-                            {wishlistCounter}
-                        </small>
+                        {isAuthenticated && (
+                            <small className="text-center notification mat xsm">
+                                {wishlistCounter}
+                            </small>
+                        )}
                     </Link>
                 </div>
                 <div className="icon-with-badge">
@@ -82,12 +86,13 @@ export function Nav() {
                             shopping_cart
                         </span>
                     </Link>
-                    <small className="text-center notification mat xsm">
-                        {cartCounter}
-                    </small>
+                    {isAuthenticated && (
+                        <small className="text-center notification mat xsm">
+                            {cartCounter}
+                        </small>
+                    )}
                 </div>
             </div>
-            {/* </div> */}
         </header>
     )
 }
