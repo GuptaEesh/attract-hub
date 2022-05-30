@@ -1,7 +1,7 @@
 import { Button, Input } from '../../atomic'
-import React, { useState } from 'react'
+import React from 'react'
 import '../NavBar/nav.css'
-import { BiSearchAlt } from 'react-icons/bi'
+// import { BiSearchAlt } from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../../../helpers/contexts/cart-context'
 import { resetFilters } from '../../../Pages/products/Filter/filter-controller'
@@ -11,20 +11,7 @@ export function Nav() {
     const { items, wishItems } = useCart()
     const { isAuthenticated } = useAuth()
     const { dispatch } = useFilter()
-    const [keyword, setKeyword] = useState()
     const navigate = useNavigate()
-    let searchBtnStyle = {
-        paddingRight: '5px',
-        width: '2rem',
-        paddingLeft: '5px',
-        borderRadius: '10px',
-        height: '100%',
-        color: 'var(--secondary-300)',
-        backgroundColor: 'var(--primary-100)',
-        cursor: 'pointer',
-        position: 'absolute',
-        right: 0,
-    }
     let wishlistCounter = wishItems?.length
     wishlistCounter = wishlistCounter > 100 ? '100+' : wishlistCounter
     let cartCounter = items?.reduce(
@@ -32,6 +19,18 @@ export function Nav() {
         0
     )
     cartCounter = cartCounter > 100 ? '100+' : cartCounter
+    const debounceFunc = () => {
+        let timer
+        return (e) => {
+            clearTimeout(timer)
+            timer = setTimeout(() => {
+                resetFilters(dispatch)
+                e.target.value.length
+                    ? navigate(`/search/${e.target.value}`)
+                    : navigate(`/search/empty`)
+            }, 300)
+        }
+    }
     return (
         <header className="nav-bar flex align-center with-shadow justify-space-between">
             <div className="nav-section-left flex-2">
@@ -50,18 +49,10 @@ export function Nav() {
             </div>
             <section className="flex search-bar align-center position-relative">
                 <Input
-                    inputValue={keyword}
-                    inputFunc={(e) => setKeyword(e.target.value)}
+                    inputFunc={debounceFunc()}
                     inputType="text"
                     inputClass="input-text sm"
-                    inputPlaceHolder="Click glass to search"
-                />
-                <BiSearchAlt
-                    style={searchBtnStyle}
-                    onClick={() => {
-                        resetFilters(dispatch)
-                        navigate(`/search/${keyword}`)
-                    }}
+                    inputPlaceHolder="Search products, brands ..."
                 />
             </section>
             <div className="nav-section-right flex align-center justify-flex-end flex-2 gap-1">
