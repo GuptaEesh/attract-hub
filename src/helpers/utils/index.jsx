@@ -1,3 +1,4 @@
+export { useInfiniteScroll } from './use-infinite-scroll'
 export {
     signUpHandler,
     loginHandler,
