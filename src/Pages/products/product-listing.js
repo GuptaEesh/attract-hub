@@ -3,29 +3,23 @@ import { useData } from '../../helpers/contexts/data-context'
 import { ProductShow, Filter } from '..'
 import { useEffect, useState } from 'react'
 import { getCategories, getProducts } from '../../helpers/utils'
+import { FaFilter } from 'react-icons/fa'
 
 export function ProductListing() {
     const { dispatchData, popups, setPopups } = useData()
-    const [isFilterOpen, setFilterOpen] = useState(true)
-    const [screenwidth, setScreenWidth] = useState()
+    const [isFilterOpen, setFilterOpen] = useState(false)
     const { loader } = popups
-    const updateWindowWidth = () => {
-        const width = window.innerWidth
-        setScreenWidth(width)
-    }
     useEffect(() => {
         getCategories(setPopups, dispatchData)
         getProducts(setPopups, dispatchData)
     }, [])
     useEffect(() => {
-        window.addEventListener('resize', updateWindowWidth)
-        if (screenwidth <= '500') setFilterOpen(false)
-        else setFilterOpen(true)
-    }, [screenwidth])
-
+        isFilterOpen
+            ? (document.body.style.overflow = 'hidden')
+            : (document.body.style.overflow = 'auto')
+    }, [isFilterOpen])
     return (
         <>
-            {' '}
             {loader ? (
                 <div className="flex align-center flex-column justify-center margin-top-r-20">
                     <Loader />
@@ -36,16 +30,20 @@ export function ProductListing() {
                     <span className="flex justify-space-between filter-dropdown height-max-content text-white bold">
                         Filter
                         <h2
-                            className="cursor-pointer"
+                            className=" cursor-pointer "
                             onClick={() => {
                                 setFilterOpen(!isFilterOpen)
                             }}
                         >
-                            {isFilterOpen ? '^' : 'v'}
+                            <FaFilter className="text-white filter-icon" />
                         </h2>
                     </span>
                     <section className="flex product-filter-page">
-                        {isFilterOpen && <Filter />}
+                        <Filter
+                            setFilterOpen={setFilterOpen}
+                            isFilterOpen={isFilterOpen}
+                        />
+
                         <ProductShow />
                     </section>
                     <Footer />

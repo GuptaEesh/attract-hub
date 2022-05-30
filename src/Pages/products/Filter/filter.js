@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import { Radio, CheckBox } from '../../../components/atomic'
+import { Radio, CheckBox, Button } from '../../../components/atomic'
 import { FilterHolder } from '../../../components/composite'
 import { FaStar } from 'react-icons/fa'
 import { useFilter } from '../../../helpers/contexts/filter-context'
@@ -15,21 +15,32 @@ import {
     ratingsHandler,
 } from './filter-controller'
 import '../products-page.css'
-export function Filter() {
+export function Filter({ setFilterOpen, isFilterOpen }) {
     const { filters, dispatch } = useFilter()
     const { dataHandler } = useData()
 
     return (
-        <div className="flex flex-column justify-space-around filter-section">
+        <div
+            className={`flex flex-1 flex-column justify-space-around filter-section ${
+                isFilterOpen ? 'show-filter' : null
+            }`}
+        >
             <section className="flex justify-space-between flex-wrap padding-1">
-                <h1> Filters </h1>
                 <button
                     className="text-underline text-blue"
                     style={{ background: 'transparent' }}
-                    onClick={() => resetFilters(dispatch)}
+                    onClick={() => {
+                        resetFilters(dispatch)
+                        isFilterOpen && setFilterOpen(!isFilterOpen)
+                    }}
                 >
                     Clear Filters
                 </button>
+                <Button
+                    btnFunc={() => setFilterOpen(!isFilterOpen)}
+                    btnText="Close"
+                    btnType="primary btn without-shadow close-filter-btn"
+                />
             </section>
             <FilterHolder legendName="Price Sort">
                 <Radio
@@ -101,9 +112,10 @@ export function Filter() {
                         <Radio
                             radioName="ratings"
                             radioText={i}
+                            checkStatus={filters.ratings === i}
                             inputFunc={() => ratingsHandler(i, dispatch)}
                         />
-                        <FaStar size="1rem" color="var(--secondary-300)" />{' '}
+                        <FaStar color="var(--secondary-300)" />
                         <span className="sm bold"> & above </span>
                     </div>
                 ))}

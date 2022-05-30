@@ -4,7 +4,7 @@ const initial = {
     outOfStock: false,
     fastDelivery: false,
     category: [],
-    ratings: 1,
+    ratings: null,
 }
 
 const filtersReducer = (filters, action) => {

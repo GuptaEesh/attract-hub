@@ -8,6 +8,9 @@ body {
 html .without-shadow{
   box-shadow: none;
 }
+.justify-center{
+  justify-content: center;
+}
 .gap-1{
   gap:1rem;
 }

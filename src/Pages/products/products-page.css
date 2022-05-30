@@ -1,12 +1,14 @@
 .filter-section{
-    box-shadow:0 0 8px var(--primary-300);
-    height: 100vh;
+    height: fit-content;
     top: 0;
-    position: sticky;
-    flex: 1;
     background-color: var(--primary-100);
-    overflow-y: auto;
+    box-shadow: 0 0 5px var(--primary-400);
+    border-top-right-radius: 10px;
 }
+.slider::-webkit-slider-thumb {
+    border-radius: 50%;
+    border: 2px solid var(--secondary-300);
+  }
 .product-image{
     height: 20rem;
     width: 30rem;
@@ -19,34 +21,55 @@
     padding: 10px;
 }
 .filter-dropdown{
-    background-color: var(--secondary-300);
-    box-shadow: inset 2px 2px 18px var(--white);
-    padding: 10px;
-    width:120px; 
+    background-color: var(--primary-400);
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    padding: 1rem;
+    z-index: 3;
     display: none;
 }
-@media all and (max-width:720px) {
+.filter-icon:hover{
+    color: var(--secondary-300);
+}
+.close-filter-btn{
+    display: none;
+}
+.filter-section.show-filter{
+    display: flex;
+}
+@media all and (max-width:1000px) {
     .filter-section{
-        flex:3;
+        flex:2;
     }
 }
-@media all and (max-width:600px) {
-    .filter-section{
-        flex:4;
-    }
-}
-@media all and (max-width:500px) {
-    .filter-section{
-        flex-basis: 50vh;
-        padding: 1rem;
-        padding-top: 38vh;
-        margin-left: 10px;
-        overflow-y:scroll;
-    }
-    .product-filter-page{
-        flex-direction: column;
+
+@media all and (max-width:770px) {
+   
+    .close-filter-btn{
+        display: flex;
     }
     .filter-dropdown{
         display: flex;
     }
+    .filter-section{
+        display: none;
+        border-radius: 0;
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        z-index: 5;
+        background-color: var(--white);
+        overflow-y:auto;
+        justify-content: unset;
+    }
+
+
+}
+@media all and (max-width:500px) {
+    
+    .product-filter-page{
+        flex-direction: column;
+    }
+    
 }

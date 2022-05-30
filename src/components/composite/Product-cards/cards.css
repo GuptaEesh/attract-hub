@@ -81,6 +81,11 @@
         height:28rem
     }
 }
+@media all and (max-width:720px){
+    .eg-card.ecomm-card{
+        min-width:18rem;
+    }
+}
 @media all and (max-width:630px){
     .cart-product{
         width: 90vw;

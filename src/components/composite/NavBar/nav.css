@@ -28,7 +28,7 @@
 @media all and (max-width:630px){
     .nav-bar{
         flex-direction: column;
-        height: 20vh;
+        height: fit-content;
         gap: 1rem;
     }
     .nav-section-left{

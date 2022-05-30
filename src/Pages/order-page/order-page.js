@@ -12,15 +12,15 @@ export function OrdersPage() {
             <h1>Congratulations! Your order has been successfully placed!</h1>
             <div className="flex align-center flex-column gap-2">
                 <h2 className="size-16">
-                    Order id is{' '}
-                    <span className="size-12">{currentOrder.id}</span>{' '}
+                    Order id is
+                    <span className="size-12"> {currentOrder.id}</span>
                 </h2>
                 <Button
                     btnType="btn primary without-shadow"
                     btnText="Shop More"
                     btnFunc={() => {
                         dispatch({ type: 'ORDER_CONFIRMED' })
-                        navigate('/profile')
+                        navigate('/profile/orders')
                     }}
                 />
             </div>
