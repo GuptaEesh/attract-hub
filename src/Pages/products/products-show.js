@@ -30,7 +30,7 @@ export function ProductShow() {
                     )
                 )}
             </div>
-            <div ref={observerHandler}></div>
+
             <div className="products-section flex justify-space-around flex-wrap gap-2">
                 {lastArray?.map((product) =>
                     product.inStock ? (
@@ -48,6 +48,7 @@ export function ProductShow() {
                     )
                 )}
             </div>
+            <div ref={observerHandler}></div>
             {loading && (
                 <article className="flex flex-column align-center justify-center">
                     <Loading />
