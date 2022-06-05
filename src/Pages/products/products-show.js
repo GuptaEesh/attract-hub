@@ -8,7 +8,7 @@ export function ProductShow() {
     const { loading, page, observerHandler } = useInfiniteScroll(finalArray)
     const slicePage = page - 1
     const firstArray = !slicePage
-        ? finalArray.slice(slicePage * 8, page * 8)
+        ? finalArray.slice(0, page * 8)
         : finalArray.slice(0, slicePage * 8)
     const lastArray = slicePage ? finalArray.slice(slicePage * 8, page * 8) : []
     return (
