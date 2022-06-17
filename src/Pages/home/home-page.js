@@ -27,9 +27,9 @@ export function Home() {
     const { dataHandler, dispatchData, popups, setPopups } = useData()
     useEffect(() => getCategories(setPopups, dispatchData), [])
     return (
-        <div className="flex flex-column father-section justify-space-between">
-            <section className="explore justify-center align-center flex flex-column gap-2">
-                <h1>
+        <div className="flex flex-column  justify-space-between">
+            <section className="explore father-section justify-center align-center flex flex-column gap-2">
+                <h1 className="text-white text-home">
                     Get some <span className="text-blue lg">cool</span> car
                     products
                 </h1>
@@ -39,9 +39,14 @@ export function Home() {
                     btnFunc={moveToProducts}
                 />
             </section>
+
+            <h1 className="text-center margin-2 lg text-underline">
+                Featured Categories
+            </h1>
+
             <div
                 className="flex flex-wrap justify-space-around width-p-100 gap-1"
-                style={{ marginTop: '-5rem', marginBottom: '5rem' }}
+                style={{ marginBottom: '5rem' }}
             >
                 {popups.loader ? (
                     <Loader />

@@ -1,6 +1,8 @@
 
 .explore{
-    height: 90vh;
+    height: 60vh;
+    margin:3rem;
+    border-radius: 10px;
 }   
 .big-button{
     padding: 1rem;
@@ -8,11 +10,14 @@
     cursor: pointer;
     transition: filter 0.25s ease-in;
 }
+.text-home{
+    font-size: xx-large;
+}
 .big-button:hover{
     filter: brightness(0.9);
 }
 .father-section{
-    background:linear-gradient(rgba(182, 182, 182, 0.5), rgba(203, 203, 203, 0.8)), url('../../images/car.webp');
+    background:linear-gradient(rgba(123, 123, 123, 0.5), rgba(130, 130, 130, 0.8)), url('../../images/car.webp');
     background-repeat: no-repeat;
     background-size: cover;
     backdrop-filter: blur(0.5);

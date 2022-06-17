@@ -1,5 +1,5 @@
 body {
-  background-image: linear-gradient(to bottom, var(--secondary-100), var(--white));
+  background-image: var(--white);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

@@ -1,21 +1,13 @@
-
+.social-links{
+    color: var(--primary-400);
+}
 .social-links:hover{
-    filter: brightness(0.2);
+    color: var(--secondary-300);
 }
 .footer{
-    box-shadow:0 0 8px var(--primary-300);
     gap:var(--size-12);
     background-color: var(--primary-100);
-    padding:var(--size-20);
+    padding:var(--size-08);
     margin-top:var(--size-12);
     transition: all 0.5s ease-in;
-}
-.footer:hover{
-    background-color:var(--white);
-}
-.connect-links{
-    gap:var(--size-12);
-    background-color:var(--secondary-100);
-    padding:var(--size-12); 
-    box-shadow:0 0 10px var(--primary-200)
 }
