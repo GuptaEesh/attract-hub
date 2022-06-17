@@ -11,3 +11,7 @@
     margin-top:var(--size-12);
     transition: all 0.5s ease-in;
 }
+.connect-links{
+    gap:1rem;
+    padding: var(--size-08);
+}
