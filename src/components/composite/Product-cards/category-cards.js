@@ -8,13 +8,15 @@ export function CategoryCard({
     categorySelect,
 }) {
     return (
-        <div className="category-cards" onClick={categorySelect}>
-            <h2 className="text-center" key={id}>
-                {' '}
+        <div
+            className="category-cards flex align-center justify-center"
+            onClick={categorySelect}
+        >
+            <h2 className="text-center position-absolute" key={id}>
                 {title}
             </h2>
             <img
-                className="width-p-100 height-p-80"
+                className="width-p-100 height-p-100"
                 src={imgSrc}
                 alt={productName}
                 loading="eager"

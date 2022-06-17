@@ -1,9 +1,28 @@
-.products-button{
-    position: absolute;
-    right:10%;
-    top: 5%;    
+
+.explore{
+    height: 90vh;
+}   
+.big-button{
+    padding: 1rem;
+    background-color: var(--white);
+    cursor: pointer;
+    transition: filter 0.25s ease-in;
 }
-.hero-img{
-    max-height: 90vh;
-    width: 100vw;
+.big-button:hover{
+    filter: brightness(0.9);
+}
+.father-section{
+    background:linear-gradient(rgba(182, 182, 182, 0.5), rgba(203, 203, 203, 0.8)), url('../../images/car.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    backdrop-filter: blur(0.5);
+}
+@media all and (max-width:1000px) {
+    .hero-img{
+        filter: brightness(0.3);
+    }
+    .hero-section{
+        display: flex;
+        flex-direction: column;
+    }
 }

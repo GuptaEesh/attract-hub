@@ -24,11 +24,20 @@
     width:15rem;
     box-shadow: 0 0 8px var(--primary-400);
     border-radius: 10px;
+    transition: filter 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.category-cards img{
+    border-radius: 10px;
+    filter: brightness(0.5);
+}
+.category-cards h2{
+    color: var(--white);
+    z-index: 1;
 }
 .category-cards:hover{
     cursor: pointer;
-    transform: scale(110%);
-    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    filter: brightness(2);
+
 }
 .card-tag:before{
     content: '';
@@ -72,9 +81,7 @@
     .category-cards{
         transform: scale(0.8);
     }
-    .category-cards:hover{
-        transform: scale(90%);
-    }
+    
 }
 @media all and (max-width:800px){
     .eg-card.ecomm-card{
