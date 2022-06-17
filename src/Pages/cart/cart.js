@@ -33,7 +33,7 @@ export function Cart() {
                     All orders are fulfilled by
                     <span className="text-blue">@Attract-Hub</span>
                     <h2>All rights reserved</h2>
-                    <span className="light md">Free delivery above 200$</span>
+                    <span className="light md">Free delivery above $200</span>
                 </div>
 
                 <PriceBanner

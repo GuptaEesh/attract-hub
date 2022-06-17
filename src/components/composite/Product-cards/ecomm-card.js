@@ -102,9 +102,9 @@ export function Card({ greyClass, product }) {
                 </header>
                 <section className="product-info">
                     <span className="bold size-12">
-                        {price}$
-                        <span className="md light text-strike">
-                            {Math.round(price * 1.3)}$
+                        ${price}
+                        <span className="md light text-strike m-p5">
+                            ${Math.round(price * 1.3)}
                         </span>
                     </span>
                     <div className="flex align-center bold">

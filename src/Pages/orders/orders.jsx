@@ -31,7 +31,7 @@ const Orders = () => {
                             </div>
                             <div>
                                 Total Price:-
-                                <span className="bold">{payment}$</span>
+                                <span className="bold">${payment}</span>
                             </div>
                             <section className="margin-1 flex flex-column gap-2">
                                 {orders.map(

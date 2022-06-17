@@ -91,7 +91,7 @@ export function CheckoutPage() {
             {items?.map((cartItem) => (
                 <CartProducts key={cartItem._id} cartItem={cartItem} />
             ))}
-            <h2> Checkout price - {totalPrice + delivery - discount}$</h2>
+            <h2> Checkout price - ${totalPrice + delivery - discount}</h2>
             {dataHandler.selectedAddress === '' ? (
                 <span className="bold text-red">Add Address Please !</span> //Add a scroll to top button
             ) : (

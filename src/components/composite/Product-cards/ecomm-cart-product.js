@@ -120,7 +120,7 @@ export function CartProducts({ cartItem }) {
                             className="bold size-12"
                             style={{ paddingRight: '10px' }}
                         >
-                            {price * Number(cartItem.qty)}$
+                            ${price * Number(cartItem.qty)}
                         </span>
                     </section>
                 ) : (

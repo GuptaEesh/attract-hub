@@ -26,24 +26,24 @@ export function PriceBanner({
                     <tbody>
                         <tr>
                             <td className="sm">Total</td>
-                            <td className="sm">{totalPrice}$</td>
+                            <td className="sm">${totalPrice}</td>
                         </tr>
                         <tr>
                             <td className="sm">Discount</td>
-                            <td className="sm">{discount}$</td>
+                            <td className="sm">${discount}</td>
                         </tr>
                         <tr>
                             <td className="sm">Delivery Charges</td>
                             <td className="sm">
                                 {delivery === 0
                                     ? 'Free Delivery'
-                                    : `${delivery}$`}
+                                    : `${delivery}`}
                             </td>
                         </tr>
                         <tr>
                             <td className="bold size-12">Total Amount:</td>
                             <td className="bold size-12">
-                                {totalPrice + delivery - discount}$
+                                ${totalPrice + delivery - discount}
                             </td>
                         </tr>
                     </tbody>

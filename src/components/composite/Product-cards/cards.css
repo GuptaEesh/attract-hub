@@ -60,6 +60,9 @@
     border-radius: var(--size-16);
     box-shadow: 0 0 8px var(--secondary-200);
 }
+.m-p5{
+    margin: 5px;
+}
 .qty-select{
     background-color: transparent;
     width: 3rem;

@@ -75,7 +75,7 @@ export function ProductPage() {
                                 )}
                             </div>
                         </section>
-                        <p className="size-12">{price}$/-</p>
+                        <p className="size-12">${price}/-</p>
 
                         <label className="flex">
                             <span className="bold">{ratings}</span>
